@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EEE 303: The Ultimate War Chest - Welcome</title>
+    <title>EEE 303: The Ultimate War Chest - Home</title>
     <style>
         :root {
             --primary-color: #1e3a8a;
@@ -11,6 +11,7 @@
             --bg-color: #f0f4f8;
             --text-color: #1a1a1a;
             --card-bg: #ffffff;
+            --accent-green: #10b981;
         }
 
         * {
@@ -31,119 +32,156 @@
             background: linear-gradient(135deg, var(--primary-color), #2563eb);
             color: white;
             text-align: center;
-            padding: 60px 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 80px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-bottom: 6px solid var(--secondary-color);
         }
 
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.2em;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
         }
 
         .hero p {
-            font-size: 1.2em;
-            max-width: 800px;
-            margin: 0 auto 20px auto;
+            font-size: 1.3em;
+            max-width: 900px;
+            margin: 0 auto 25px auto;
             color: #e0e7ff;
+            font-weight: 300;
         }
 
         .hero .author-badge {
             display: inline-block;
             background-color: var(--secondary-color);
             color: #78350f;
-            padding: 8px 20px;
+            padding: 10px 25px;
             border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1em;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 800;
+            font-size: 1.2em;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
         }
 
         /* Main Content */
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
+            max-width: 1200px;
+            margin: -40px auto 40px auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 10;
         }
 
-        .welcome-message {
+        .welcome-card {
             background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            border-left: 8px solid var(--secondary-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             margin-bottom: 40px;
         }
 
-        .welcome-message h2 {
+        .welcome-card h2 {
             color: var(--primary-color);
-            margin-bottom: 15px;
-            font-size: 2em;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            text-align: center;
         }
 
+        .welcome-card p {
+            font-size: 1.1em;
+            color: #475569;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Instructions Box */
         .instructions {
-            background-color: #ecfdf5;
-            border: 1px solid #10b981;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            color: #065f46;
+            background-color: #f8fafc;
+            border: 2px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 30px;
         }
 
-        .instructions strong {
-            color: #047857;
+        .instructions h3 {
+            color: var(--accent-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .instructions ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .instructions li {
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .instructions li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
         }
 
         /* Module Grid */
         .module-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .module-card {
             background-color: var(--card-bg);
-            border-radius: 10px;
-            padding: 30px 20px;
+            border-radius: 12px;
+            padding: 40px 25px;
             text-align: center;
             text-decoration: none;
             color: var(--text-color);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-bottom: 5px solid var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-top: 6px solid var(--primary-color);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-between;
         }
 
         .module-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            border-bottom-color: var(--secondary-color);
+            transform: translateY(-12px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-top-color: var(--secondary-color);
         }
 
         .module-card h3 {
-            font-size: 1.5em;
+            font-size: 1.6em;
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         .module-card p {
             font-size: 1em;
-            color: #475569;
-            margin-bottom: 20px;
+            color: #64748b;
+            margin-bottom: 25px;
         }
 
         .module-card .btn {
             background-color: var(--primary-color);
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             font-weight: bold;
-            transition: background-color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            transition: background 0.3s;
         }
 
         .module-card:hover .btn {
@@ -151,89 +189,108 @@
             color: #1a1a1a;
         }
 
+        /* Special Theory Card */
+        .theory-card {
+            border-top-color: var(--accent-green) !important;
+            background-color: #f0fdf4;
+        }
+
         /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            background-color: #1e293b;
-            color: #cbd5e1;
-            margin-top: 50px;
+            padding: 50px 20px;
+            background-color: #0f172a;
+            color: #94a3b8;
+            margin-top: 60px;
         }
 
         footer strong {
             color: white;
+            font-size: 1.1em;
+        }
+
+        .whatsapp-link {
+            color: #25d366;
+            text-decoration: none;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Section -->
     <header class="hero">
-        <h1>EEE 303: The Ultimate War Chest</h1>
-        <p>Master Electromagnetic Field Theory. Comprehensive hints, crucial formulas, and rigorous CBT practice based on Sadiku and FUTA past questions.</p>
-        <div class="author-badge">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ)</div>
+        <h1>EEE 303: THE ULTIMATE WAR CHEST</h1>
+        <p>Your comprehensive portal for Electromagnetic Field Theory. Master Sadiku's principles through exploratory notes, solved past questions, and rigorous CBT practice.</p>
+        <div class="author-badge">ABIDEEN YAKUB OPEYEMI (Ó'YẸMÍ)</div>
     </header>
 
-    <!-- Main Container -->
     <main class="container">
         
-        <!-- Welcome & Instructions -->
-        <section class="welcome-message">
-            <h2>Welcome, Champions.</h2>
-            <p>Electromagnetic Field Theory is not about memorization; it's about visualization and understanding the fundamental laws that govern the universe. This portal is designed to break down the complexities of EEE 303 into highly digestible, exam-focused modules.</p>
-            
-            <p style="margin-top: 10px;">Each module below contains specific <strong>survival hints</strong>, <strong>lecture notes</strong>, and a rigorously programmed <strong>100-Question CBT Engine</strong> designed exactly like your standard exams.</p>
+        <section class="welcome-card">
+            <h2>Bridge the Gap to Excellence</h2>
+            <p>Electromagnetics is the logic of the invisible. This War Chest is engineered to provide FUTA students with the tactical advantage needed to navigate Module tests and Final Exams with absolute precision.</p>
 
             <div class="instructions">
-                <strong>&#9888; IMPORTANT CBT INSTRUCTIONS:</strong>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li><strong>Multiple Choice & True/False:</strong> Select the most appropriate option.</li>
-                    <li><strong>Fill-in-the-Gaps:</strong> You MUST write your answers in <strong>CAPITAL LETTERS</strong> for the system to grade you correctly. Keep answers to single words or standard short phrases as taught in class.</li>
-                    <li>Questions will shuffle automatically upon retaking a test. Practice until you hit 100%.</li>
+                <h3>&#128203; CBT NAVIGATOR RULES</h3>
+                <ul>
+                    <li><strong>Objective Sections:</strong> Shuffled 25-question mock exams pulled from a 100-question master bank.</li>
+                    <li><strong>Fill-in-the-Gaps:</strong> <strong>STRICT RULE:</strong> You MUST type your answers in <strong>ALL CAPITAL LETTERS</strong> for the system to validate them.</li>
+                    <li><strong>Theory Master:</strong> Contains step-by-step mathematical proofs and derivations for high-score questions.</li>
                 </ul>
             </div>
         </section>
 
-        <!-- Module Navigation Grid -->
         <section class="module-grid">
             
-            <!-- Module 1 -->
             <a href="vector_algebra.html" class="module-card">
-                <h3>Module 1</h3>
-                <p>Vector Algebra & Transformations</p>
-                <span class="btn">Enter Module</span>
+                <div>
+                    <h3>Module 1</h3>
+                    <p>Vector Algebra, Coordinate Systems & Transformations</p>
+                </div>
+                <span class="btn">Launch Module</span>
             </a>
 
-            <!-- Module 2 -->
             <a href="vector_calculus.html" class="module-card">
-                <h3>Module 2</h3>
-                <p>Vector Calculus (The Del Operator)</p>
-                <span class="btn">Enter Module</span>
+                <div>
+                    <h3>Module 2</h3>
+                    <p>Vector Calculus: Del, Divergence, Gradient & Curl</p>
+                </div>
+                <span class="btn">Launch Module</span>
             </a>
 
-            <!-- Module 3 -->
             <a href="electrostatics.html" class="module-card">
-                <h3>Module 3</h3>
-                <p>Electrostatics</p>
-                <span class="btn">Enter Module</span>
+                <div>
+                    <h3>Module 3</h3>
+                    <p>Electrostatics: Coulomb's Law, Gauss & Potentials</p>
+                </div>
+                <span class="btn">Launch Module</span>
             </a>
 
-            <!-- Module 4 -->
             <a href="magnetostatics.html" class="module-card">
-                <h3>Module 4</h3>
-                <p>Magnetostatics</p>
-                <span class="btn">Enter Module</span>
+                <div>
+                    <h3>Module 4</h3>
+                    <p>Magnetostatics: Ampere's Law, Biot-Savart & Forces</p>
+                </div>
+                <span class="btn">Launch Module</span>
+            </a>
+
+            <a href="theory_solutions.html" class="module-card theory-card">
+                <div>
+                    <h3>Theory Master</h3>
+                    <p>Solved Past Questions, Proofs & Exam Derivations</p>
+                </div>
+                <span class="btn" style="background-color: var(--accent-green);">Access Vault</span>
             </a>
 
         </section>
 
     </main>
 
-    <!-- Footer -->
     <footer>
-        <p><strong>FUTA Excellence Series</strong></p>
-        <p>Curated and Engineered by <strong>Abideen Yakub Opeyemi (Ó'YẸMÍ)</strong></p>
-        <p>Contact / WhatsApp: <strong>07050376975</strong></p>
+        <p><strong>FUTA EXCELLENCE SERIES</strong></p>
+        <p style="margin: 10px 0;">Designed & Engineered for Academic Mastery</p>
+        <p>Contact: <strong>Abideen Yakub Opeyemi (Ó'YẸMÍ)</strong></p>
+        <p>WhatsApp: <a href="https://wa.me/2347050376975" class="whatsapp-link">07050376975</a></p>
     </footer>
 
 </body>
