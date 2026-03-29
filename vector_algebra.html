@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1: Vector Algebra - EEE 303 War Chest</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 20px; 
+            color: var(--text-color); 
+            background-color: var(--bg-color);
+        }
+        .header-box {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header-box h1 {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+        .header-box p { font-style: italic; color: #e0e7ff; }
+        .nav-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #78350f;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background-color: #d97706; color: white; }
+        
+        .section-card { 
+            background-color: var(--card-bg); 
+            border-left: 8px solid var(--primary-color); 
+            border-radius: 10px; 
+            padding: 25px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .section-card h2 { color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-size: 1.8em; }
+        .concept-title { font-weight: 800; color: #d97706; font-size: 1.25em; display: block; margin-top: 20px; margin-bottom: 10px; }
+        .math-block { font-family: 'Courier New', Courier, monospace; background-color: #e0e7ff; padding: 2px 6px; border-radius: 4px; color: #312e81; font-weight: bold; }
+        .trap-box { background-color: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; margin: 15px 0; color: #991b1b; }
+        ul { margin-top: 5px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+        /* Quiz Styles */
+        #quiz-section { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #10b981; margin-top: 40px; }
+        .quiz-header { text-align: center; color: #10b981; margin-bottom: 10px; }
+        .quiz-instructions { text-align: center; background-color: #ecfdf5; padding: 10px; border: 1px dashed #10b981; margin-bottom: 25px; color: #065f46; font-weight: bold; }
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #1e3a8a; }
+        .options-list { list-style-type: none; padding-left: 0; }
+        .options-list li { margin-bottom: 8px; }
+        .options-list label { cursor: pointer; padding: 5px; display: inline-block; width: 100%; border-radius: 4px; transition: background 0.2s; }
+        .options-list label:hover { background-color: #f1f5f9; }
+        .fill-blank-input { padding: 10px; width: 80%; border: 2px solid #cbd5e1; border-radius: 4px; font-size: 1.1em; text-transform: uppercase; }
+        .fill-blank-input:focus { border-color: var(--primary-color); outline: none; }
+        
+        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
+        button:hover { background-color: #1e40af; }
+        
+        #results-container { display: none; text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px; border: 2px dashed #10b981; margin-top: 20px; }
+        .correct { color: #16a34a; font-weight: bold; }
+        .incorrect { color: #dc2626; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>MODULE 1: VECTOR ALGEBRA</h1>
+        <p>Coordinate Systems & Transformations</p>
+        <p style="font-size: 0.9em; margin-top: 5px;">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ) | 07050376975</p>
+        <a href="index.html" class="nav-btn">&larr; Back to Home</a>
+    </div>
+
+    <!-- Notes Section -->
+    <div class="section-card">
+        <h2>Survival Hints & Lecture Notes</h2>
+        
+        <div class="concept-title">1. Scalars vs. Vectors</div>
+        <ul>
+            <li><strong>Scalar:</strong> Has only magnitude (e.g., Time, Mass, Distance, Electric Potential).</li>
+            <li><strong>Vector:</strong> Has magnitude AND direction (e.g., Velocity, Force, Electric Field Intensity).</li>
+            <li><strong>Unit Vector (a_A):</strong> A vector with a magnitude of 1. Formula: <span class="math">a<sub>A</sub> = A / |A|</span></li>
+        </ul>
+
+        <div class="concept-title">2. Vector Multiplication</div>
+        <ul>
+            <li><strong>Dot Product (A &middot; B):</strong> Yields a SCALAR. Used to find the angle between vectors or project one vector onto another. <br>
+            <em>Rule:</em> <span class="math">A &middot; B = |A||B|cos(&theta;)</span>. If two vectors are orthogonal (90&deg;), their dot product is <strong>ZERO</strong>.</li>
+            <li><strong>Cross Product (A &times; B):</strong> Yields a VECTOR perpendicular to both A and B. <br>
+            <em>Rule:</em> <span class="math">A &times; B = |A||B|sin(&theta;) a<sub>n</sub></span>. If two vectors are parallel (0&deg; or 180&deg;), their cross product is <strong>ZERO</strong>.</li>
+        </ul>
+
+        <div class="concept-title">3. The Three Coordinate Systems</div>
+        <ul>
+            <li><strong>Cartesian (x, y, z):</strong> Unit vectors <span class="math">a<sub>x</sub>, a<sub>y</sub>, a<sub>z</sub></span> are constant in direction. Volume element <span class="math">dv = dx dy dz</span>.</li>
+            <li><strong>Cylindrical (&rho;, &phi;, z):</strong> Unit vectors <span class="math">a<sub>&rho;</sub>, a<sub>&phi;</sub></span> change direction based on position. Volume element <span class="math">dv = &rho; d&rho; d&phi; dz</span>.</li>
+            <li><strong>Spherical (r, &theta;, &phi;):</strong> Unit vectors <span class="math">a<sub>r</sub>, a<sub>&theta;</sub>, a<sub>&phi;</sub></span> change direction. Volume element <span class="math">dv = r<sup>2</sup> sin&theta; dr d&theta; d&phi;</span>.</li>
+        </ul>
+
+        <div class="trap-box">
+            <strong>&#9888; O'YEMI'S TRANSFORMATION TRAPS:</strong><br>
+            When converting a point from Cartesian (x,y,z) to Cylindrical (&rho;,&phi;,z):<br>
+            - <span class="math">&rho; = &radic;(x<sup>2</sup> + y<sup>2</sup>)</span><br>
+            - <span class="math">&phi; = tan<sup>-1</sup>(y/x)</span> (Careful with the quadrant! If x is negative, add 180&deg;).<br>
+            - <span class="math">z = z</span> (It remains exactly the same!).
+        </div>
+    </div>
+
+    <!-- CBT Quiz Engine -->
+    <div id="quiz-section">
+        <h2 class="quiz-header">&#127919; MODULE 1: CBT EXAM SIMULATOR</h2>
+        <div class="quiz-instructions">
+            READ CAREFULLY: For "Fill-in-the-gap" questions, you MUST type your answer in CAPITAL LETTERS (e.g., ZERO, VECTOR, SCALAR).<br>
+            You will face 25 randomly selected questions per attempt.
+        </div>
+        
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" onclick="gradeQuiz()">Submit Exam</button>
+
+        <div id="results-container">
+            <h2 id="score-display"></h2>
+            <p id="score-message"></p>
+            <button onclick="loadQuiz()">Retake Quiz (Shuffle New Questions)</button>
+        </div>
+    </div>
+
+    <script>
+        // O'yemi's Vector Algebra Master Bank (60 Dense Questions)
+        const questionBank = [
+            // TRUE/FALSE
+            { type: 'tf', q: 'The dot product of two parallel vectors is always zero.', a: 'False' },
+            { type: 'tf', q: 'The cross product of two parallel vectors is always zero.', a: 'True' },
+            { type: 'tf', q: 'A unit vector has a magnitude of exactly one.', a: 'True' },
+            { type: 'tf', q: 'The unit vectors in the Cartesian coordinate system change direction depending on the spatial point.', a: 'False' },
+            { type: 'tf', q: 'The unit vector a_rho in the cylindrical system points radially outward from the z-axis.', a: 'True' },
+            { type: 'tf', q: 'Temperature is an example of a vector field.', a: 'False' },
+            { type: 'tf', q: 'Electric field intensity is an example of a vector field.', a: 'True' },
+            { type: 'tf', q: 'The dot product of a vector with itself gives the square of its magnitude.', a: 'True' },
+            { type: 'tf', q: 'The cross product operation follows the commutative law (A × B = B × A).', a: 'False' },
+            { type: 'tf', q: 'The dot product operation follows the commutative law (A · B = B · A).', a: 'True' },
+            { type: 'tf', q: 'In spherical coordinates, the polar angle theta ranges from 0 to 2pi.', a: 'False' },
+            { type: 'tf', q: 'In cylindrical coordinates, the azimuthal angle phi ranges from 0 to 2pi.', a: 'True' },
+            { type: 'tf', q: 'The vector product of ax and ay yields az.', a: 'True' },
+            { type: 'tf', q: 'The dot product of ax and ay yields az.', a: 'False' },
+            { type: 'tf', q: 'A position vector is always defined relative to the origin (0,0,0).', a: 'True' },
+            { type: 'tf', q: 'A distance vector represents the displacement between any two arbitrary points.', a: 'True' },
+            { type: 'tf', q: 'Spherical coordinate variable r represents the perpendicular distance from the z-axis.', a: 'False' },
+            { type: 'tf', q: 'The cross product is used to find the projection of one vector onto another.', a: 'False' },
+            { type: 'tf', q: 'The scalar triple product A · (B × C) represents the volume of a parallelepiped.', a: 'True' },
+            { type: 'tf', q: 'Coordinate transformations require evaluating the dot products of the respective unit vectors.', a: 'True' },
+
+            // MULTIPLE CHOICE
+            { type: 'mcq', q: 'Which of the following represents the variables of the cylindrical coordinate system?', options: ['x, y, z', 'r, theta, phi', 'rho, phi, z', 'r, phi, z'], a: 'rho, phi, z' },
+            { type: 'mcq', q: 'Which of the following represents the variables of the spherical coordinate system?', options: ['x, y, z', 'rho, phi, z', 'r, theta, phi', 'rho, theta, z'], a: 'r, theta, phi' },
+            { type: 'mcq', q: 'The cross product ax × ay results in:', options: ['0', '1', 'az', '-az'], a: 'az' },
+            { type: 'mcq', q: 'The dot product ax · ay results in:', options: ['0', '1', 'az', '-az'], a: '0' },
+            { type: 'mcq', q: 'If A · B = 0, and neither A nor B are zero vectors, what is the angle between them?', options: ['0 degrees', '45 degrees', '90 degrees', '180 degrees'], a: '90 degrees' },
+            { type: 'mcq', q: 'If A × B = 0, and neither A nor B are zero vectors, the vectors are:', options: ['Orthogonal', 'Parallel', 'Coplanar', 'Intersecting'], a: 'Parallel' },
+            { type: 'mcq', q: 'To find the unit vector of A, you divide A by its:', options: ['Direction', 'Magnitude', 'Inverse', 'Derivative'], a: 'Magnitude' },
+            { type: 'mcq', q: 'The conversion formula rho = √(x² + y²) is used to convert from Cartesian to:', options: ['Spherical', 'Cylindrical', 'Polar', 'Both Cylindrical and Spherical'], a: 'Cylindrical' },
+            { type: 'mcq', q: 'In spherical coordinates, the angle theta is measured from:', options: ['The positive x-axis', 'The positive y-axis', 'The positive z-axis', 'The xy-plane'], a: 'The positive z-axis' },
+            { type: 'mcq', q: 'Which operation yields a vector perpendicular to the plane containing two given vectors?', options: ['Dot Product', 'Cross Product', 'Scalar Addition', 'Vector Division'], a: 'Cross Product' },
+            { type: 'mcq', q: 'The value of the scalar triple product A · (A × B) is always:', options: ['1', '|A|²|B|', '0', 'Depends on the angle'], a: '0' },
+            { type: 'mcq', q: 'In cylindrical coordinates, the differential volume element dv is:', options: ['dx dy dz', 'r² sin(theta) dr d(theta) d(phi)', 'rho d(rho) d(phi) dz', 'rho d(rho) dz'], a: 'rho d(rho) d(phi) dz' },
+            { type: 'mcq', q: 'Which coordinate system is best suited for analyzing an infinitely long straight wire?', options: ['Cartesian', 'Cylindrical', 'Spherical', 'Elliptical'], a: 'Cylindrical' },
+            { type: 'mcq', q: 'Which coordinate system is best suited for analyzing a point charge?', options: ['Cartesian', 'Cylindrical', 'Spherical', 'Rectangular'], a: 'Spherical' },
+            { type: 'mcq', q: 'The angle phi in both cylindrical and spherical coordinates is measured from:', options: ['The positive x-axis in the xy-plane', 'The positive z-axis', 'The y-axis', 'The origin'], a: 'The positive x-axis in the xy-plane' },
+
+            // FILL IN THE GAPS (Strictly mapped to CAPITAL letters)
+            { type: 'fill', q: 'A physical quantity that is completely described by its magnitude alone is called a ________.', a: 'SCALAR' },
+            { type: 'fill', q: 'A physical quantity that has both magnitude and direction is called a ________.', a: 'VECTOR' },
+            { type: 'fill', q: 'The cross product of a vector with itself yields exactly ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The dot product of two orthogonal vectors evaluates to ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The coordinate system consisting of variables r, theta, and phi is the ________ coordinate system.', a: 'SPHERICAL' },
+            { type: 'fill', q: 'The coordinate system consisting of variables rho, phi, and z is the ________ coordinate system.', a: 'CYLINDRICAL' },
+            { type: 'fill', q: 'The dot product of a vector with itself yields the ________ of its magnitude.', a: 'SQUARE' },
+            { type: 'fill', q: 'In spherical coordinates, the angle theta is commonly referred to as the ________ angle.', a: 'POLAR' },
+            { type: 'fill', q: 'In cylindrical coordinates, the angle phi is commonly referred to as the ________ angle.', a: 'AZIMUTHAL' },
+            { type: 'fill', q: 'To project vector A onto vector B, you evaluate their ________ product.', a: 'DOT' },
+            { type: 'fill', q: 'The cross product of vectors follows the ________-hand rule to determine direction.', a: 'RIGHT' },
+            { type: 'fill', q: 'In the Cartesian system, the unit vectors are completely ________ in both magnitude and direction.', a: 'CONSTANT' },
+            { type: 'fill', q: 'The vector displacement from the origin to a specific point is called a ________ vector.', a: 'POSITION' },
+            { type: 'fill', q: 'If the cross product of two non-zero vectors is zero, the vectors are ________ to each other.', a: 'PARALLEL' },
+            { type: 'fill', q: 'If the dot product of two non-zero vectors is zero, the vectors are ________ to each other.', a: 'ORTHOGONAL' },
+            { type: 'fill', q: 'The magnitude of any unit vector is exactly ________.', a: 'ONE' },
+            { type: 'fill', q: 'Vector A is mathematically divided by its own ________ to calculate its unit vector.', a: 'MAGNITUDE' },
+            { type: 'fill', q: 'The z-coordinate in Cartesian corresponds exactly to the ________-coordinate in Cylindrical.', a: 'Z' },
+            { type: 'fill', q: 'Vector addition obeys the ________ law of addition, usually visualized using a triangle or parallelogram.', a: 'COMMUTATIVE' },
+            { type: 'fill', q: 'The dot product of vector A and vector B yields a ________ quantity.', a: 'SCALAR' },
+            { type: 'fill', q: 'The cross product of vector A and vector B yields a ________ quantity.', a: 'VECTOR' },
+            { type: 'fill', q: 'The cross product of unit vector ay and unit vector ax evaluates to negative ________.', a: 'AZ' },
+            { type: 'fill', q: 'In a scalar triple product, switching the dot and cross operations leaves the result ________.', a: 'UNCHANGED' },
+            { type: 'fill', q: 'A vector connecting point A to point B is formally called a ________ vector.', a: 'DISTANCE' },
+            { type: 'fill', q: 'The volume element dv in Cartesian coordinates is dx dy ________.', a: 'DZ' }
+        ];
+
+        let currentQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+
+            // Clone and shuffle
+            currentQuestions = [...questionBank];
+            shuffleArray(currentQuestions);
+
+            // Select 25 questions per attempt
+            currentQuestions = currentQuestions.slice(0, 25); 
+
+            currentQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'question-block';
+                
+                let html = `<div class="question-text">${index + 1}. ${q.q}</div>`;
+
+                if (q.type === 'tf') {
+                    html += `
+                        <ul class="options-list">
+                            <li><label><input type="radio" name="q${index}" value="True"> True</label></li>
+                            <li><label><input type="radio" name="q${index}" value="False"> False</label></li>
+                        </ul>
+                    `;
+                } else if (q.type === 'mcq') {
+                    let options = [...q.options];
+                    shuffleArray(options); 
+                    html += `<ul class="options-list">`;
+                    options.forEach(opt => {
+                        html += `<li><label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label></li>`;
+                    });
+                    html += `</ul>`;
+                } else if (q.type === 'fill') {
+                    html += `<input type="text" class="fill-blank-input" name="q${index}" placeholder="TYPE IN CAPITAL LETTERS...">`;
+                }
+
+                html += `<div id="feedback-${index}" class="feedback"></div>`;
+                qBlock.innerHTML = html;
+                container.appendChild(qBlock);
+            });
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach((q, index) => {
+                const feedbackEl = document.getElementById(`feedback-${index}`);
+                let userAnswer = '';
+
+                if (q.type === 'tf' || q.type === 'mcq') {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected) userAnswer = selected.value;
+                } else if (q.type === 'fill') {
+                    const input = document.querySelector(`input[name="q${index}"]`);
+                    userAnswer = input.value.trim(); // Do not convert yet to check exact match
+                }
+
+                let isCorrect = false;
+                if (q.type === 'fill') {
+                    // Check if it matches exactly (meaning they typed it in CAPS as instructed)
+                    if (userAnswer === q.a) {
+                        isCorrect = true;
+                    } else if (userAnswer.toUpperCase() === q.a) {
+                        // They got the word right but didn't use CAPS. Mark wrong for strictness, or right with warning.
+                        // I will strictly enforce the CAPITALS requirement as requested.
+                        isCorrect = false; 
+                    }
+                } else {
+                    if (userAnswer === q.a) isCorrect = true;
+                }
+
+                if (isCorrect) {
+                    score++;
+                    feedbackEl.innerHTML = `<span class="correct">✔ Correct!</span>`;
+                } else {
+                    if (q.type === 'fill' && userAnswer.toUpperCase() === q.a) {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect! You did not use CAPITAL LETTERS. The answer is: <strong>${q.a}</strong></span>`;
+                    } else {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect. The correct answer is: <strong>${q.a}</strong></span>`;
+                    }
+                }
+            });
+
+            document.getElementById('submit-btn').style.display = 'none';
+            const resultsBox = document.getElementById('results-container');
+            resultsBox.style.display = 'block';
+            
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById('score-display').innerText = `You scored ${score} out of ${total} (${percentage}%)`;
+            
+            let msg = '';
+            if (percentage >= 80) msg = "Outstanding Champion! You've mastered Vector Algebra. 🔥";
+            else if (percentage >= 50) msg = "Good effort, but review the coordinate transformations again. 📖";
+            else msg = "Keep practicing! Don't let Cartesian and Cylindrical confuse you! ⚔️";
+            
+            document.getElementById('score-message').innerText = msg;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>
