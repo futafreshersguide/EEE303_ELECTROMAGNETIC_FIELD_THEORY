@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Magnetostatics - EEE 303 War Chest</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 20px; 
+            color: var(--text-color); 
+            background-color: var(--bg-color);
+        }
+        .header-box {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header-box h1 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .header-box p { font-style: italic; color: #e0e7ff; }
+        .nav-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #78350f;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background-color: #d97706; color: white; }
+        
+        .section-card { 
+            background-color: var(--card-bg); 
+            border-left: 8px solid var(--primary-color); 
+            border-radius: 10px; 
+            padding: 25px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .section-card h2 { color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-size: 1.8em; }
+        .concept-title { font-weight: 800; color: #d97706; font-size: 1.25em; display: block; margin-top: 20px; margin-bottom: 10px; }
+        .math-block { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #e0e7ff; 
+            padding: 10px; 
+            border-radius: 6px; 
+            color: #312e81; 
+            font-weight: bold; 
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .trap-box { background-color: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; margin: 15px 0; color: #991b1b; }
+        ul { margin-top: 5px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+        /* Quiz Styles */
+        #quiz-section { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #10b981; margin-top: 40px; }
+        .quiz-header { text-align: center; color: #10b981; margin-bottom: 10px; }
+        .quiz-instructions { text-align: center; background-color: #ecfdf5; padding: 10px; border: 1px dashed #10b981; margin-bottom: 25px; color: #065f46; font-weight: bold; }
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #1e3a8a; }
+        .options-list { list-style-type: none; padding-left: 0; }
+        .options-list li { margin-bottom: 8px; }
+        .options-list label { cursor: pointer; padding: 5px; display: inline-block; width: 100%; border-radius: 4px; transition: background 0.2s; }
+        .options-list label:hover { background-color: #f1f5f9; }
+        .fill-blank-input { padding: 10px; width: 80%; border: 2px solid #cbd5e1; border-radius: 4px; font-size: 1.1em; text-transform: uppercase; }
+        .fill-blank-input:focus { border-color: var(--primary-color); outline: none; }
+        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
+        button:hover { background-color: #1e40af; }
+        #results-container { display: none; text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px; border: 2px dashed #10b981; margin-top: 20px; }
+        .correct { color: #16a34a; font-weight: bold; }
+        .incorrect { color: #dc2626; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>MODULE 4: MAGNETOSTATICS</h1>
+        <p>Steady Currents, Biot-Savart Law, Ampere's Law & Magnetic Forces</p>
+        <p style="font-size: 0.9em; margin-top: 5px;">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ) | 07050376975</p>
+        <a href="index.html" class="nav-btn">&larr; Back to Home</a>
+    </div>
+
+    <div class="section-card">
+        <h2>Exploratory Notes & Essential Formulas</h2>
+        <p>Magnetostatics deals with magnetic fields generated by <strong>steady (DC) currents</strong>. Unlike electric fields which originate from point charges, magnetic fields are generated by charges in constant motion and they always form continuous, unbroken loops.</p>
+
+        <div class="concept-title">1. Magnetic Field Intensity (H) vs. Magnetic Flux Density (B)</div>
+        <ul>
+            <li><strong>Magnetic Field Intensity (H):</strong> The "effort" or magnetizing force driven purely by the free source currents. It is independent of the material medium. Unit: <strong>Amperes/meter (A/m)</strong>.</li>
+            <li><strong>Magnetic Flux Density (B):</strong> The actual, physical magnetic field that results. It depends heavily on the material the field penetrates. Unit: <strong>Tesla (T)</strong> or <strong>Webers/m&sup2;</strong>.</li>
+            <li><strong>The Relationship:</strong> <span class="math-block">B = &mu;H = &mu;_o&mu;_r H</span> (where &mu;_o = 4&pi; &times; 10<sup>-7</sup> H/m).</li>
+        </ul>
+
+        <div class="concept-title">2. Ampere's Circuit Law</div>
+        <p>This is the magnetostatic equivalent of Gauss's Law. It states that the line integral of H around a closed path is exactly equal to the direct current enclosed by that path.</p>
+        <ul>
+            <li><strong>Integral Form:</strong> <span class="math-block">&oint; H &middot; dl = I_enc = &int; J &middot; dS</span></li>
+            <li><strong>Differential Form:</strong> Derived using Stokes' theorem. It proves the magnetic field is rotational (has "swirl").
+            <span class="math-block">&nabla; &times; H = J</span> (where J is the volume current density).</li>
+        </ul>
+
+        <div class="concept-title">3. The Non-Existence of Magnetic Monopoles</div>
+        <p>Because magnetic field lines never start or stop, the net outward magnetic flux through any closed surface is exactly zero. Every line that enters a box must also exit it!</p>
+        <ul>
+            <li><strong>Integral Form:</strong> <span class="math-block">&oint; B &middot; dS = 0</span></li>
+            <li><strong>Differential Form:</strong> Derived using the Divergence theorem.
+            <span class="math-block">&nabla; &middot; B = 0</span> (The field is strictly Solenoidal).</li>
+        </ul>
+
+        <div class="concept-title">4. Magnetic Forces & Lorentz Equation</div>
+        <ul>
+            <li><strong>Magnetic Force (Fm):</strong> A magnetic field ONLY exerts force on a <strong>moving</strong> charge.
+            <span class="math-block">F_m = Q(v &times; B)</span></li>
+            <li>The force is always perpendicular to BOTH the velocity (v) and the field (B). It is maximum when the angle is 90&deg; ($sin 90&deg; = 1$).</li>
+            <li><strong>Lorentz Force:</strong> Total force when both Electric and Magnetic fields are present.
+            <span class="math-block">F = F_e + F_m = Q(E + v &times; B)</span></li>
+        </ul>
+
+        <div class="trap-box">
+            <strong>&#9888; O'YEMI'S MAGNETOSTATIC TRAPS:</strong><br>
+            1. <strong>Infinite Wire Formula:</strong> $H = I / (2\pi\rho) a_\phi$. Don't confuse the $2\pi\rho$ with $4\pi r^2$!<br>
+            2. <strong>True/False Pitfall:</strong> "Ampere's law is analogous to Coulomb's law." <strong>FALSE.</strong> It is analogous to <em>Gauss's Law</em>.<br>
+            3. <strong>Work Done:</strong> A static magnetic field does <strong>ZERO work</strong> on a moving charge. It can only change the particle's direction, never its speed or kinetic energy!
+        </div>
+    </div>
+
+    <div id="quiz-section">
+        <h2 class="quiz-header">&#127919; MODULE 4: MAGNETOSTATICS EXAM SIMULATOR</h2>
+        <div class="quiz-instructions">
+            READ CAREFULLY: For "Fill-in-the-gap" questions, you MUST type your answer in CAPITAL LETTERS (e.g., TESLA, ZERO).<br>
+            You will face 25 randomly selected questions from the master bank per attempt.
+        </div>
+        
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" onclick="gradeQuiz()">Submit Exam</button>
+
+        <div id="results-container">
+            <h2 id="score-display"></h2>
+            <p id="score-message"></p>
+            <button onclick="loadQuiz()">Retake Quiz (Shuffle New Questions)</button>
+        </div>
+    </div>
+
+    <script>
+        // O'yemi's Magnetostatics Master Bank (75+ Dense Questions)
+        const questionBank = [
+            // TRUE/FALSE
+            { type: 'tf', q: 'Magnetic dipoles can never exist.', a: 'False' },
+            { type: 'tf', q: 'Magnetic monopoles are abundantly found in nature.', a: 'False' },
+            { type: 'tf', q: 'A magnetic field can exert force on both moving and stationary charges.', a: 'False' },
+            { type: 'tf', q: 'An electric field can exert force on both moving and stationary charges.', a: 'True' },
+            { type: 'tf', q: 'Ampere\'s law in magnetostatics is analogous to Coulomb\'s law in electrostatics.', a: 'False' },
+            { type: 'tf', q: 'Ampere\'s law in magnetostatics is analogous to Gauss\'s law in electrostatics.', a: 'True' },
+            { type: 'tf', q: 'Magnetic field lines always form closed loops, with no beginning or end.', a: 'True' },
+            { type: 'tf', q: 'The divergence of the magnetic flux density B is always zero.', a: 'True' },
+            { type: 'tf', q: 'The curl of the magnetic field intensity H is always zero in a region containing a steady current.', a: 'False' },
+            { type: 'tf', q: 'The total magnetic flux passing through any perfectly closed surface is exactly zero.', a: 'True' },
+            { type: 'tf', q: 'The Earth\'s magnetic field is injurious to life.', a: 'False' },
+            { type: 'tf', q: 'Magnetic field intensity H depends on the permeability of the medium.', a: 'False' },
+            { type: 'tf', q: 'Magnetic flux density B depends on the permeability of the medium.', a: 'True' },
+            { type: 'tf', q: 'The magnetic field inside an ideal, infinitely long solenoid is zero.', a: 'False' },
+            { type: 'tf', q: 'The magnetic field outside an ideal, infinitely long solenoid is zero.', a: 'True' },
+            { type: 'tf', q: 'The tangential component of magnetic field intensity (Ht) is continuous across a boundary if there is no surface current.', a: 'True' },
+            { type: 'tf', q: 'The normal component of magnetic flux density (Bn) is discontinuous across a boundary.', a: 'False' },
+            { type: 'tf', q: 'A static magnetic field does no work on a moving charged particle.', a: 'True' },
+            { type: 'tf', q: 'The Biot-Savart law can be used to determine the magnetic field generated by a steady current element.', a: 'True' },
+            { type: 'tf', q: 'Two parallel wires carrying current in the exact same direction will repel each other.', a: 'False' },
+            { type: 'tf', q: 'Two parallel wires carrying current in the exact same direction will attract each other.', a: 'True' },
+
+            // MULTIPLE CHOICE
+            { type: 'mcq', q: 'The equation ∇ · B = 0 signifies which physical reality?', options: ['Conservation of charge', 'Irrotational magnetic fields', 'Non-existence of magnetic monopoles', 'Faraday\'s law of induction'], a: 'Non-existence of magnetic monopoles' },
+            { type: 'mcq', q: 'What is the unit of Magnetic Flux Density (B)?', options: ['Amperes/meter', 'Webers', 'Tesla', 'Coulombs/m²'], a: 'Tesla' },
+            { type: 'mcq', q: 'What is the standard unit of Magnetic Field Intensity (H)?', options: ['Amperes/meter', 'Tesla', 'Webers', 'Volts/meter'], a: 'Amperes/meter' },
+            { type: 'mcq', q: 'The force experienced by a charged particle moving through a magnetic field is maximum when the angle between its velocity and the magnetic field is:', options: ['0 degrees', '45 degrees', '90 degrees', '180 degrees'], a: '90 degrees' },
+            { type: 'mcq', q: 'Ampere\'s law relates the closed line integral of magnetic field intensity around a closed path to the:', options: ['Electric field intensity', 'Current passing through the loop', 'Magnetic flux density', 'Charge enclosed'], a: 'Current passing through the loop' },
+            { type: 'mcq', q: 'The differential form of Ampere\'s Circuit Law is:', options: ['∇ × E = 0', '∇ · D = ρv', '∇ · B = 0', '∇ × H = J'], a: '∇ × H = J' },
+            { type: 'mcq', q: 'Which theorem is used to convert the integral form of Ampere\'s law to its differential form?', options: ['Divergence Theorem', 'Stokes\' Theorem', 'Green\'s Theorem', 'Gauss\'s Theorem'], a: 'Stokes\' Theorem' },
+            { type: 'mcq', q: 'Which theorem is used to prove that ∇ · B = 0 starting from the integral form?', options: ['Divergence Theorem', 'Stokes\' Theorem', 'Ampere\'s Theorem', 'Coulomb\'s Law'], a: 'Divergence Theorem' },
+            { type: 'mcq', q: 'The fundamental law used to calculate the magnetic field intensity from a differential current element is:', options: ['Gauss\'s Law', 'Coulomb\'s Law', 'Biot-Savart Law', 'Lenz\'s Law'], a: 'Biot-Savart Law' },
+            { type: 'mcq', q: 'Which field parameter is completely independent of the material medium?', options: ['Magnetic Flux Density (B)', 'Electric Flux Density (D)', 'Magnetic Field Intensity (H)', 'Permittivity (ε)'], a: 'Magnetic Field Intensity (H)' },
+            { type: 'mcq', q: 'The force on a charged particle moving with velocity v in BOTH an electric field E and magnetic field B is called the:', options: ['Coulomb force', 'Lorentz force', 'Ampere force', 'Faraday force'], a: 'Lorentz force' },
+            { type: 'mcq', q: 'If a charged particle moves exactly parallel to a uniform magnetic field, the magnetic force it experiences is:', options: ['Maximum', 'Minimum but non-zero', 'Zero', 'Infinite'], a: 'Zero' },
+            { type: 'mcq', q: 'Magnetic vector potential (A) is defined such that the magnetic flux density B equals:', options: ['∇ · A', '∇ × A', '-∇A', '∇²A'], a: '∇ × A' },
+            { type: 'mcq', q: 'The boundary condition for the normal component of the magnetic flux density (Bn) across two magnetic media is:', options: ['Bn1 - Bn2 = Js', 'Bn1 = Bn2', 'Bn1 = 0', 'μ1 Bn1 = μ2 Bn2'], a: 'Bn1 = Bn2' },
+            { type: 'mcq', q: 'What is the permeability of free space (μo)?', options: ['8.854 × 10^-12 F/m', '4π × 10^-7 H/m', '9 × 10^9 m/F', '1.6 × 10^-19 C'], a: '4π × 10^-7 H/m' },
+
+            // FILL IN THE GAPS (Strictly mapped to CAPITAL letters)
+            { type: 'fill', q: 'According to Ampere\'s law, the circulation of H around a closed path equals the total ___________ enclosed.', a: 'CURRENT' },
+            { type: 'fill', q: 'The magnetic flux density B and magnetic field intensity H are related by the ___________ of the medium.', a: 'PERMEABILITY' },
+            { type: 'fill', q: 'Because magnetic field lines always form closed loops, the magnetic field is mathematically described as a ___________ field.', a: 'SOLENOIDAL' },
+            { type: 'fill', q: 'A magnetic field only exerts a force on a charge if the charge is ___________.', a: 'MOVING' },
+            { type: 'fill', q: 'The direction of the magnetic field circulating around a straight current-carrying wire is determined by the ___________-hand rule.', a: 'RIGHT' },
+            { type: 'fill', q: 'The unit for measuring total magnetic flux is the ___________.', a: 'WEBER' },
+            { type: 'fill', q: 'The SI unit for Magnetic Flux Density is the ___________.', a: 'TESLA' },
+            { type: 'fill', q: 'The cross product of a particle\'s velocity v and magnetic field B determines the direction of the magnetic ___________.', a: 'FORCE' },
+            { type: 'fill', q: 'Magnetic lines of force outside a physical bar magnet travel from the North pole to the ___________ pole.', a: 'SOUTH' },
+            { type: 'fill', q: 'The fact that the divergence of B equals zero proves the non-existence of magnetic ___________.', a: 'MONOPOLES' },
+            { type: 'fill', q: 'The differential form of Ampere\'s law equates the ___________ of H to the current density J.', a: 'CURL' },
+            { type: 'fill', q: 'To convert the closed line integral in Ampere\'s law to a surface integral, we apply ___________ theorem.', a: 'STOKES' },
+            { type: 'fill', q: 'The ratio of magnetic flux density B to magnetic field intensity H in a vacuum is the permeability of free ___________.', a: 'SPACE' },
+            { type: 'fill', q: 'At a boundary between two magnetic materials, the ___________ component of the magnetic flux density B is always continuous.', a: 'NORMAL' },
+            { type: 'fill', q: 'At a boundary between two magnetic materials, the ___________ component of H is continuous if there is no surface current.', a: 'TANGENTIAL' },
+            { type: 'fill', q: 'The equation expressing the total force on a charge moving through both E and B fields is called the ___________ force equation.', a: 'LORENTZ' },
+            { type: 'fill', q: 'The law that computes the differential magnetic field intensity dH from a differential current element dl is the ___________-Savart law.', a: 'BIOT' },
+            { type: 'fill', q: 'The work done by a static magnetic field on a moving charge is always exactly ___________.', a: 'ZERO' },
+            { type: 'fill', q: 'Two parallel wires carrying currents in opposite directions will mutually ___________ each other.', a: 'REPEL' },
+            { type: 'fill', q: 'The macroscopic field generated strictly by free source currents, ignoring the material\'s magnetization, is the magnetic field ___________.', a: 'INTENSITY' },
+            { type: 'fill', q: 'A steady direct current (DC) produces a magnetic field that is perfectly ___________ with time.', a: 'CONSTANT' }
+        ];
+
+        let currentQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+
+            currentQuestions = [...questionBank];
+            shuffleArray(currentQuestions);
+            // Select 25 random questions per attempt
+            currentQuestions = currentQuestions.slice(0, 25); 
+
+            currentQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'question-block';
+                
+                let html = `<div class="question-text">${index + 1}. ${q.q}</div>`;
+
+                if (q.type === 'tf') {
+                    html += `
+                        <ul class="options-list">
+                            <li><label><input type="radio" name="q${index}" value="True"> True</label></li>
+                            <li><label><input type="radio" name="q${index}" value="False"> False</label></li>
+                        </ul>
+                    `;
+                } else if (q.type === 'mcq') {
+                    let options = [...q.options];
+                    shuffleArray(options); 
+                    html += `<ul class="options-list">`;
+                    options.forEach(opt => {
+                        html += `<li><label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label></li>`;
+                    });
+                    html += `</ul>`;
+                } else if (q.type === 'fill') {
+                    html += `<input type="text" class="fill-blank-input" name="q${index}" placeholder="TYPE IN CAPITAL LETTERS...">`;
+                }
+
+                html += `<div id="feedback-${index}" class="feedback"></div>`;
+                qBlock.innerHTML = html;
+                container.appendChild(qBlock);
+            });
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach((q, index) => {
+                const feedbackEl = document.getElementById(`feedback-${index}`);
+                let userAnswer = '';
+
+                if (q.type === 'tf' || q.type === 'mcq') {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected) userAnswer = selected.value;
+                } else if (q.type === 'fill') {
+                    const input = document.querySelector(`input[name="q${index}"]`);
+                    userAnswer = input.value.trim();
+                }
+
+                let isCorrect = false;
+                if (q.type === 'fill') {
+                    if (userAnswer === q.a) {
+                        isCorrect = true;
+                    } else if (userAnswer.toUpperCase() === q.a) {
+                        isCorrect = false; // Strict caps penalty
+                    }
+                } else {
+                    if (userAnswer === q.a) isCorrect = true;
+                }
+
+                if (isCorrect) {
+                    score++;
+                    feedbackEl.innerHTML = `<span class="correct">✔ Correct!</span>`;
+                } else {
+                    if (q.type === 'fill' && userAnswer.toUpperCase() === q.a) {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect! You did not use CAPITAL LETTERS. The exact answer is: <strong>${q.a}</strong></span>`;
+                    } else {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect. The correct answer is: <strong>${q.a}</strong></span>`;
+                    }
+                }
+            });
+
+            document.getElementById('submit-btn').style.display = 'none';
+            const resultsBox = document.getElementById('results-container');
+            resultsBox.style.display = 'block';
+            
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById('score-display').innerText = `You scored ${score} out of ${total} (${percentage}%)`;
+            
+            let msg = '';
+            if (percentage >= 80) msg = "Outstanding! You are a Magnetostatics Master! 🔥";
+            else if (percentage >= 50) msg = "Good effort, but review Ampere's and Biot-Savart Laws again. 📖";
+            else msg = "Keep practicing! Don't let B and H confuse you! ⚔️";
+            
+            document.getElementById('score-message').innerText = msg;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>
