@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2: Vector Calculus - EEE 303 War Chest</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 20px; 
+            color: var(--text-color); 
+            background-color: var(--bg-color);
+        }
+        .header-box {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header-box h1 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .header-box p { font-style: italic; color: #e0e7ff; }
+        .nav-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #78350f;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background-color: #d97706; color: white; }
+        
+        .section-card { 
+            background-color: var(--card-bg); 
+            border-left: 8px solid var(--primary-color); 
+            border-radius: 10px; 
+            padding: 25px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .section-card h2 { color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-size: 1.8em; }
+        .concept-title { font-weight: 800; color: #d97706; font-size: 1.25em; display: block; margin-top: 20px; margin-bottom: 10px; }
+        .math-block { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #e0e7ff; 
+            padding: 10px; 
+            border-radius: 6px; 
+            color: #312e81; 
+            font-weight: bold; 
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .trap-box { background-color: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; margin: 15px 0; color: #991b1b; }
+        ul { margin-top: 5px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+        /* Quiz Styles */
+        #quiz-section { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #10b981; margin-top: 40px; }
+        .quiz-header { text-align: center; color: #10b981; margin-bottom: 10px; }
+        .quiz-instructions { text-align: center; background-color: #ecfdf5; padding: 10px; border: 1px dashed #10b981; margin-bottom: 25px; color: #065f46; font-weight: bold; }
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #1e3a8a; }
+        .options-list { list-style-type: none; padding-left: 0; }
+        .options-list li { margin-bottom: 8px; }
+        .options-list label { cursor: pointer; padding: 5px; display: inline-block; width: 100%; border-radius: 4px; transition: background 0.2s; }
+        .options-list label:hover { background-color: #f1f5f9; }
+        .fill-blank-input { padding: 10px; width: 80%; border: 2px solid #cbd5e1; border-radius: 4px; font-size: 1.1em; text-transform: uppercase; }
+        .fill-blank-input:focus { border-color: var(--primary-color); outline: none; }
+        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
+        button:hover { background-color: #1e40af; }
+        #results-container { display: none; text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px; border: 2px dashed #10b981; margin-top: 20px; }
+        .correct { color: #16a34a; font-weight: bold; }
+        .incorrect { color: #dc2626; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; }
+        .image-container { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>MODULE 2: VECTOR CALCULUS</h1>
+        <p>The Del Operator, Divergence, Gradient, Curl & Theorems</p>
+        <p style="font-size: 0.9em; margin-top: 5px;">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ) | 07050376975</p>
+        <a href="index.html" class="nav-btn">&larr; Back to Home</a>
+    </div>
+
+    <div class="section-card">
+        <h2>Exploratory Notes & Essential Formulas</h2>
+        <p>Vector calculus is the heartbeat of electromagnetic theory. It explains how fields change over space. The secret to passing EEE 303 is memorizing the <strong>scale factors</strong> ($h_1, h_2, h_3$) for each coordinate system, because they completely change the formulas for Divergence and Curl.</p>
+
+        <div class="concept-title">1. The Gradient (&nabla;V)</div>
+        <p>Operates on a scalar field ($V$) to produce a vector. It points in the direction of the maximum rate of increase of the function. It is heavily used to find the Electric Field from Electric Potential ($E = -\nabla V$).</p>
+        <div class="image-container">
+            
+        </div>
+        <ul>
+            <li><strong>Cartesian:</strong> <span class="math-block">&nabla;V = (&part;V/&part;x)a<sub>x</sub> + (&part;V/&part;y)a<sub>y</sub> + (&part;V/&part;z)a<sub>z</sub></span></li>
+            <li><strong>Cylindrical:</strong> <span class="math-block">&nabla;V = (&part;V/&part;&rho;)a<sub>&rho;</sub> + (1/&rho;)(&part;V/&part;&phi;)a<sub>&phi;</sub> + (&part;V/&part;z)a<sub>z</sub></span></li>
+            <li><strong>Spherical:</strong> <span class="math-block">&nabla;V = (&part;V/&part;r)a<sub>r</sub> + (1/r)(&part;V/&part;&theta;)a<sub>&theta;</sub> + (1/(r sin&theta;))(&part;V/&part;&phi;)a<sub>&phi;</sub></span></li>
+        </ul>
+
+        <div class="concept-title">2. The Divergence (&nabla; &middot; A)</div>
+        <p>Operates on a vector field ($\mathbf{A}$) to produce a scalar. It measures the net outward flux of a field per unit volume from a point. A positive divergence means the point is a <strong>source</strong>; a negative divergence means it's a <strong>sink</strong>.</p>
+        <div class="image-container">
+            
+        </div>
+        <ul>
+            <li><strong>Cartesian:</strong> <span class="math-block">&nabla; &middot; A = &part;A<sub>x</sub>/&part;x + &part;A<sub>y</sub>/&part;y + &part;A<sub>z</sub>/&part;z</span></li>
+            <li><strong>Cylindrical:</strong> <span class="math-block">&nabla; &middot; A = (1/&rho;) &part;(&rho;A<sub>&rho;</sub>)/&part;&rho; + (1/&rho;) &part;A<sub>&phi;</sub>/&part;&phi; + &part;A<sub>z</sub>/&part;z</span></li>
+            <li><strong>Spherical:</strong> <span class="math-block">&nabla; &middot; A = (1/r<sup>2</sup>) &part;(r<sup>2</sup>A<sub>r</sub>)/&part;r + (1/(r sin&theta;)) &part;(A<sub>&theta;</sub> sin&theta;)/&part;&theta; + (1/(r sin&theta;)) &part;A<sub>&phi;</sub>/&part;&phi;</span></li>
+        </ul>
+
+        <div class="concept-title">3. The Curl (&nabla; &times; A)</div>
+        <p>Operates on a vector field to produce another vector. It represents the macroscopic circulation or "swirl" of a field. Magnetic fields always have curl because they form closed loops.</p>
+        <div class="image-container">
+            
+        </div>
+        <p><em>In Cartesian, you use the standard determinant matrix. For Cylindrical and Spherical, beware of the scale factors!</em></p>
+        <ul>
+            <li><strong>Cylindrical (The Trick):</strong> You must multiply the $A_\phi$ component by $\rho$ inside the derivative, and divide the overall $\mathbf{a}_z$ term by $\rho$.</li>
+            <li><strong>Spherical (The Trap):</strong> You must multiply $A_\theta$ by $r$, and $A_\phi$ by $r\sin\theta$ inside the determinant.</li>
+        </ul>
+
+        <div class="trap-box">
+            <strong>&#9888; O'YEMI'S NULL IDENTITIES:</strong><br>
+            These will save you 10 minutes of calculus on the exam if you spot them:<br>
+            1. The curl of a gradient is ALWAYS zero: <strong>&nabla; &times; (&nabla;V) = 0</strong><br>
+            2. The divergence of a curl is ALWAYS zero: <strong>&nabla; &middot; (&nabla; &times; A) = 0</strong><br>
+            If a question asks you to "Calculate the divergence of the curl of Vector F," just write 0 and move on!
+        </div>
+
+        <div class="concept-title">4. The Great Theorems</div>
+        <ul>
+            <li><strong>Divergence Theorem (Gauss's Theorem):</strong> <span class="math-block">&oint;<sub>S</sub> A &middot; dS = &int;<sub>v</sub> (&nabla; &middot; A) dv</span><br> Converts a closed surface integral to a volume integral.</li>
+            <li><strong>Stokes' Theorem:</strong> <span class="math-block">&oint;<sub>L</sub> A &middot; dl = &int;<sub>S</sub> (&nabla; &times; A) &middot; dS</span><br> Converts a closed line integral to an open surface integral.</li>
+        </ul>
+    </div>
+
+    <div id="quiz-section">
+        <h2 class="quiz-header">&#127919; MODULE 2: VECTOR CALCULUS EXAM SIMULATOR</h2>
+        <div class="quiz-instructions">
+            READ CAREFULLY: For "Fill-in-the-gap" questions, you MUST type your answer in CAPITAL LETTERS (e.g., ZERO, SCALAR).<br>
+            You will face 25 randomly selected questions from the 100-question master bank per attempt.
+        </div>
+        
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" onclick="gradeQuiz()">Submit Exam</button>
+
+        <div id="results-container">
+            <h2 id="score-display"></h2>
+            <p id="score-message"></p>
+            <button onclick="loadQuiz()">Retake Quiz (Shuffle New Questions)</button>
+        </div>
+    </div>
+
+    <script>
+        // O'yemi's Vector Calculus Master Bank (100 Questions)
+        const questionBank = [
+            // TRUE/FALSE (35 Questions)
+            { type: 'tf', q: 'The divergence of a vector field is a scalar field.', a: 'True' },
+            { type: 'tf', q: 'The gradient of a scalar field is a scalar field.', a: 'False' },
+            { type: 'tf', q: 'The curl of a vector field is a scalar field.', a: 'False' },
+            { type: 'tf', q: 'The operator del (∇) is a vector differential operator.', a: 'True' },
+            { type: 'tf', q: 'The curl of the gradient of any scalar function is always zero.', a: 'True' },
+            { type: 'tf', q: 'The divergence of the curl of any vector field is always zero.', a: 'True' },
+            { type: 'tf', q: 'If the divergence of a vector field is zero, the field is said to be irrotational.', a: 'False' },
+            { type: 'tf', q: 'If the curl of a vector field is zero, the field is said to be solenoidal.', a: 'False' },
+            { type: 'tf', q: 'A field that is both solenoidal and irrotational satisfies Laplace’s equation.', a: 'True' },
+            { type: 'tf', q: 'The Divergence theorem relates a surface integral to a volume integral.', a: 'True' },
+            { type: 'tf', q: 'Stokes\' theorem relates a volume integral to a line integral.', a: 'False' },
+            { type: 'tf', q: 'The gradient of V points in the direction of the maximum rate of decrease of V.', a: 'False' },
+            { type: 'tf', q: 'The Laplacian operator (∇²) can operate on both scalar and vector fields.', a: 'True' },
+            { type: 'tf', q: 'The divergence of the position vector r = x(ax) + y(ay) + z(az) is equal to 3.', a: 'True' },
+            { type: 'tf', q: 'In cylindrical coordinates, the divergence formula includes a (1/rho) scale factor.', a: 'True' },
+            { type: 'tf', q: 'The physical meaning of positive divergence is a sink.', a: 'False' },
+            { type: 'tf', q: 'Magnetic fields are always solenoidal because magnetic monopoles do not exist.', a: 'True' },
+            { type: 'tf', q: 'Electrostatic fields are always irrotational.', a: 'True' },
+            { type: 'tf', q: 'A vector field representing fluid flow with no sources or sinks has a divergence greater than zero.', a: 'False' },
+            { type: 'tf', q: 'The curl of a uniform vector field (constant everywhere) is zero.', a: 'True' },
+            { type: 'tf', q: 'The divergence of a uniform vector field (constant everywhere) is zero.', a: 'True' },
+            { type: 'tf', q: 'Gradient operations can be performed on vector fields.', a: 'False' },
+            { type: 'tf', q: 'The divergence of the electric flux density D equals the volume charge density.', a: 'True' },
+            { type: 'tf', q: 'Stokes\' theorem requires a closed surface.', a: 'False' },
+            { type: 'tf', q: 'The Divergence theorem requires a closed surface.', a: 'True' },
+            { type: 'tf', q: 'The line integral of an irrotational vector field around a closed path is zero.', a: 'True' },
+            { type: 'tf', q: 'If ∇ × A = 0, then A can be expressed as the gradient of a scalar field.', a: 'True' },
+            { type: 'tf', q: 'If ∇ · B = 0, then B can be expressed as the curl of a vector field.', a: 'True' },
+            { type: 'tf', q: 'The cross product of the del operator with itself yields the Laplacian.', a: 'False' },
+            { type: 'tf', q: 'The dot product of the del operator with itself yields the Laplacian.', a: 'True' },
+            { type: 'tf', q: 'Divergence measures the macroscopic circulation of a field.', a: 'False' },
+            { type: 'tf', q: 'Curl measures the vorticity or rotation of a field.', a: 'True' },
+            { type: 'tf', q: 'The scale factors (h1, h2, h3) for the Cartesian system are (1, 1, 1).', a: 'True' },
+            { type: 'tf', q: 'The scale factors for the Cylindrical system are (1, r, 1).', a: 'False' },
+            { type: 'tf', q: 'The scale factors for the Spherical system are (1, r, r*sin(theta)).', a: 'True' },
+
+            // MULTIPLE CHOICE (35 Questions)
+            { type: 'mcq', q: 'Which operation evaluates the net outward flux of a vector field per unit volume?', options: ['Gradient', 'Divergence', 'Curl', 'Laplacian'], a: 'Divergence' },
+            { type: 'mcq', q: 'Which operation evaluates the maximum spatial rate of change of a scalar field?', options: ['Gradient', 'Divergence', 'Curl', 'Laplacian'], a: 'Gradient' },
+            { type: 'mcq', q: 'Which operation evaluates the circulation of a vector field per unit area?', options: ['Gradient', 'Divergence', 'Curl', 'Laplacian'], a: 'Curl' },
+            { type: 'mcq', q: 'If the divergence of a field is zero everywhere, the field is mathematically called:', options: ['Irrotational', 'Conservative', 'Solenoidal', 'Harmonic'], a: 'Solenoidal' },
+            { type: 'mcq', q: 'If the curl of a field is zero everywhere, the field is mathematically called:', options: ['Solenoidal', 'Divergent', 'Irrotational', 'Rotational'], a: 'Irrotational' },
+            { type: 'mcq', q: 'The identity ∇ · (∇ × A) evaluates to:', options: ['∇²A', '0', '1', '∇(∇·A)'], a: '0' },
+            { type: 'mcq', q: 'The identity ∇ × (∇V) evaluates to:', options: ['∇²V', '0', '1', 'A vector constant'], a: '0' },
+            { type: 'mcq', q: 'Which theorem relates a closed surface integral to a volume integral?', options: ['Stokes\' Theorem', 'Gauss\'s Divergence Theorem', 'Green\'s Theorem', 'Ampere\'s Theorem'], a: 'Gauss\'s Divergence Theorem' },
+            { type: 'mcq', q: 'Which theorem relates a closed line integral to an open surface integral?', options: ['Stokes\' Theorem', 'Gauss\'s Divergence Theorem', 'Coulomb\'s Law', 'Biot-Savart Law'], a: 'Stokes\' Theorem' },
+            { type: 'mcq', q: 'If ∇ · A > 0 at a point, that point is physically a:', options: ['Sink', 'Source', 'Vortex', 'Null point'], a: 'Source' },
+            { type: 'mcq', q: 'If ∇ · A < 0 at a point, that point is physically a:', options: ['Sink', 'Source', 'Vortex', 'Equilibrium point'], a: 'Sink' },
+            { type: 'mcq', q: 'The operator ∇² is known as the:', options: ['Gradient', 'Divergence', 'Laplacian', 'Hamiltonian'], a: 'Laplacian' },
+            { type: 'mcq', q: 'In cylindrical coordinates, the scale factor h2 (associated with d_phi) is:', options: ['1', 'r', 'rho', 'r*sin(theta)'], a: 'rho' },
+            { type: 'mcq', q: 'In spherical coordinates, the scale factor h3 (associated with d_phi) is:', options: ['1', 'r', 'rho', 'r*sin(theta)'], a: 'r*sin(theta)' },
+            { type: 'mcq', q: 'What is the divergence of the position vector r = x(ax) + y(ay) + z(az)?', options: ['0', '1', '2', '3'], a: '3' },
+            { type: 'mcq', q: 'The equation ∇²V = 0 is known as:', options: ['Poisson\'s Equation', 'Laplace\'s Equation', 'Maxwell\'s Equation', 'Wave Equation'], a: 'Laplace\'s Equation' },
+            { type: 'mcq', q: 'The equation ∇²V = -ρv/ε is known as:', options: ['Poisson\'s Equation', 'Laplace\'s Equation', 'Maxwell\'s Equation', 'Continuity Equation'], a: 'Poisson\'s Equation' },
+            { type: 'mcq', q: 'A vector field F can be represented as F = -∇V. This implies that F is:', options: ['Solenoidal', 'Irrotational', 'Rotational', 'Time-varying'], a: 'Irrotational' },
+            { type: 'mcq', q: 'Magnetic flux density B is always:', options: ['Irrotational', 'Solenoidal', 'Conservative', 'Divergent'], a: 'Solenoidal' },
+            { type: 'mcq', q: 'The line integral of an irrotational field around a closed path evaluates to:', options: ['1', 'Infinity', '0', 'The enclosed flux'], a: '0' },
+            { type: 'mcq', q: 'Stokes\' theorem converts the line integral of A into the surface integral of:', options: ['∇ · A', '∇ × A', '∇A', '∇²A'], a: '∇ × A' },
+            { type: 'mcq', q: 'Divergence theorem converts the surface integral of A into the volume integral of:', options: ['∇ · A', '∇ × A', '∇A', '∇²A'], a: '∇ · A' },
+            { type: 'mcq', q: 'The gradient of a scalar field is geometrically perpendicular (normal) to the:', options: ['Vector field lines', 'Equipotential surfaces', 'Z-axis', 'Origin'], a: 'Equipotential surfaces' },
+            { type: 'mcq', q: 'Which of the following operations is physically meaningless?', options: ['Gradient of a scalar', 'Divergence of a vector', 'Curl of a scalar', 'Curl of a vector'], a: 'Curl of a scalar' },
+            { type: 'mcq', q: 'Which of the following operations is physically meaningless?', options: ['Divergence of a scalar', 'Gradient of a scalar', 'Divergence of a vector', 'Laplacian of a scalar'], a: 'Divergence of a scalar' },
+            { type: 'mcq', q: 'To compute the work done moving a particle along a path in a force field, you evaluate a:', options: ['Volume integral', 'Surface integral', 'Line integral', 'Double integral'], a: 'Line integral' },
+            { type: 'mcq', q: 'The curl of the position vector r = x(ax) + y(ay) + z(az) is:', options: ['0', '1', '3', 'r'], a: '0' },
+            { type: 'mcq', q: 'If ∇ × H = J, this is the differential form of:', options: ['Gauss\'s Law', 'Faraday\'s Law', 'Ampere\'s Circuit Law', 'Coulomb\'s Law'], a: 'Ampere\'s Circuit Law' },
+            { type: 'mcq', q: 'If ∇ · D = ρv, this is the differential form of:', options: ['Gauss\'s Law', 'Faraday\'s Law', 'Ampere\'s Circuit Law', 'Biot-Savart Law'], a: 'Gauss\'s Law' },
+            { type: 'mcq', q: 'The cross product of Del and a vector A evaluates to:', options: ['Gradient', 'Divergence', 'Curl', 'Laplacian'], a: 'Curl' },
+            { type: 'mcq', q: 'The dot product of Del and a vector A evaluates to:', options: ['Gradient', 'Divergence', 'Curl', 'Laplacian'], a: 'Divergence' },
+            { type: 'mcq', q: 'If a vector field A represents fluid velocity, ∇ × A represents the fluid\'s:', options: ['Density', 'Expansion', 'Vorticity', 'Mass'], a: 'Vorticity' },
+            { type: 'mcq', q: 'If a vector field represents fluid velocity, ∇ · A represents the fluid\'s:', options: ['Vorticity', 'Rotation', 'Volume expansion rate', 'Angular momentum'], a: 'Volume expansion rate' },
+            { type: 'mcq', q: 'The gradient operation is represented by the symbol:', options: ['∇·', '∇×', '∇', '∇²'], a: '∇' },
+            { type: 'mcq', q: 'Which system uses variables rho, phi, and z?', options: ['Cartesian', 'Spherical', 'Cylindrical', 'Polar'], a: 'Cylindrical' },
+
+            // FILL IN THE GAPS (30 Questions - MUST BE EXACT MATCH FOR ALL CAPS)
+            { type: 'fill', q: 'The divergence of a vector field always produces a ________ quantity.', a: 'SCALAR' },
+            { type: 'fill', q: 'The gradient of a scalar field always produces a ________ quantity.', a: 'VECTOR' },
+            { type: 'fill', q: 'The curl of a vector field always produces a ________ quantity.', a: 'VECTOR' },
+            { type: 'fill', q: 'A vector field with zero divergence is called ________.', a: 'SOLENOIDAL' },
+            { type: 'fill', q: 'A vector field with zero curl is called ________.', a: 'IRROTATIONAL' },
+            { type: 'fill', q: 'The curl of the gradient of a scalar field is always exactly ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The divergence of the curl of a vector field is always exactly ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The ________ theorem relates a volume integral to a closed surface integral.', a: 'DIVERGENCE' },
+            { type: 'fill', q: 'The ________ theorem relates a surface integral to a closed line integral.', a: 'STOKES' },
+            { type: 'fill', q: 'The dot product of the del operator with itself yields the ________ operator.', a: 'LAPLACIAN' },
+            { type: 'fill', q: 'A point where the divergence of a vector field is positive is physically called a ________.', a: 'SOURCE' },
+            { type: 'fill', q: 'A point where the divergence of a vector field is negative is physically called a ________.', a: 'SINK' },
+            { type: 'fill', q: 'The gradient of scalar field V points in the direction of the maximum rate of ________ of V.', a: 'INCREASE' },
+            { type: 'fill', q: 'The equation del squared V equals zero is known as ________ equation.', a: 'LAPLACE' },
+            { type: 'fill', q: 'The operation that measures the macroscopic circulation of a field is the ________.', a: 'CURL' },
+            { type: 'fill', q: 'The operation that measures the net outward flux of a field per unit volume is the ________.', a: 'DIVERGENCE' },
+            { type: 'fill', q: 'The static electric field is conservative, making it an ________ field.', a: 'IRROTATIONAL' },
+            { type: 'fill', q: 'Magnetic fields always form closed loops, making them ________ fields.', a: 'SOLENOIDAL' },
+            { type: 'fill', q: 'To convert a line integral around a boundary into a surface integral over the area, use ________ theorem.', a: 'STOKES' },
+            { type: 'fill', q: 'To convert a closed surface flux integral into a volume integral, use the ________ theorem.', a: 'DIVERGENCE' },
+            { type: 'fill', q: 'The gradient of a scalar field is always geometrically ________ to equipotential surfaces.', a: 'NORMAL' },
+            { type: 'fill', q: 'In the cylindrical coordinate divergence formula, the rho component derivative is scaled by one over ________.', a: 'RHO' },
+            { type: 'fill', q: 'The triangle symbol used for gradient, divergence, and curl is called the ________ operator.', a: 'DEL' },
+            { type: 'fill', q: 'The cross product of del and a vector field A evaluates the ________ of A.', a: 'CURL' },
+            { type: 'fill', q: 'The dot product of del and a vector field A evaluates the ________ of A.', a: 'DIVERGENCE' },
+            { type: 'fill', q: 'If the curl of force field F is zero, then the work done in a closed loop is ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The curl of an irrotational field evaluates to ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The divergence of a solenoidal field evaluates to ________.', a: 'ZERO' },
+            { type: 'fill', q: 'Gauss\'s law in differential form equates the divergence of D to the volume charge ________.', a: 'DENSITY' },
+            { type: 'fill', q: 'Ampere\'s law in differential form equates the curl of H to the current ________.', a: 'DENSITY' }
+        ];
+
+        let currentQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+
+            currentQuestions = [...questionBank];
+            shuffleArray(currentQuestions);
+            currentQuestions = currentQuestions.slice(0, 25); 
+
+            currentQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'question-block';
+                
+                let html = `<div class="question-text">${index + 1}. ${q.q}</div>`;
+
+                if (q.type === 'tf') {
+                    html += `
+                        <ul class="options-list">
+                            <li><label><input type="radio" name="q${index}" value="True"> True</label></li>
+                            <li><label><input type="radio" name="q${index}" value="False"> False</label></li>
+                        </ul>
+                    `;
+                } else if (q.type === 'mcq') {
+                    let options = [...q.options];
+                    shuffleArray(options); 
+                    html += `<ul class="options-list">`;
+                    options.forEach(opt => {
+                        html += `<li><label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label></li>`;
+                    });
+                    html += `</ul>`;
+                } else if (q.type === 'fill') {
+                    html += `<input type="text" class="fill-blank-input" name="q${index}" placeholder="TYPE IN CAPITAL LETTERS...">`;
+                }
+
+                html += `<div id="feedback-${index}" class="feedback"></div>`;
+                qBlock.innerHTML = html;
+                container.appendChild(qBlock);
+            });
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach((q, index) => {
+                const feedbackEl = document.getElementById(`feedback-${index}`);
+                let userAnswer = '';
+
+                if (q.type === 'tf' || q.type === 'mcq') {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected) userAnswer = selected.value;
+                } else if (q.type === 'fill') {
+                    const input = document.querySelector(`input[name="q${index}"]`);
+                    userAnswer = input.value.trim();
+                }
+
+                let isCorrect = false;
+                if (q.type === 'fill') {
+                    if (userAnswer === q.a) {
+                        isCorrect = true;
+                    } else if (userAnswer.toUpperCase() === q.a) {
+                        isCorrect = false; 
+                    }
+                } else {
+                    if (userAnswer === q.a) isCorrect = true;
+                }
+
+                if (isCorrect) {
+                    score++;
+                    feedbackEl.innerHTML = `<span class="correct">✔ Correct!</span>`;
+                } else {
+                    if (q.type === 'fill' && userAnswer.toUpperCase() === q.a) {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect! You did not use CAPITAL LETTERS. The exact answer is: <strong>${q.a}</strong></span>`;
+                    } else {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect. The correct answer is: <strong>${q.a}</strong></span>`;
+                    }
+                }
+            });
+
+            document.getElementById('submit-btn').style.display = 'none';
+            const resultsBox = document.getElementById('results-container');
+            resultsBox.style.display = 'block';
+            
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById('score-display').innerText = `You scored ${score} out of ${total} (${percentage}%)`;
+            
+            let msg = '';
+            if (percentage >= 80) msg = "Excellent! You have mastered Vector Calculus! 🔥";
+            else if (percentage >= 50) msg = "Good effort, but review the scale factors and Del formulas again. 📖";
+            else msg = "Keep practicing! Don't let Divergence and Curl defeat you! ⚔️";
+            
+            document.getElementById('score-message').innerText = msg;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>
