@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEE 303: The Ultimate War Chest - Welcome</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            max-width: 800px;
+            margin: 0 auto 20px auto;
+            color: #e0e7ff;
+        }
+
+        .hero .author-badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #78350f;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .welcome-message {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 8px solid var(--secondary-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .welcome-message h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 2em;
+        }
+
+        .instructions {
+            background-color: #ecfdf5;
+            border: 1px solid #10b981;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            color: #065f46;
+        }
+
+        .instructions strong {
+            color: #047857;
+        }
+
+        /* Module Grid */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .module-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-bottom: 5px solid var(--primary-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-bottom-color: var(--secondary-color);
+        }
+
+        .module-card h3 {
+            font-size: 1.5em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .module-card p {
+            font-size: 1em;
+            color: #475569;
+            margin-bottom: 20px;
+        }
+
+        .module-card .btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .module-card:hover .btn {
+            background-color: var(--secondary-color);
+            color: #1a1a1a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: #1e293b;
+            color: #cbd5e1;
+            margin-top: 50px;
+        }
+
+        footer strong {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>EEE 303: The Ultimate War Chest</h1>
+        <p>Master Electromagnetic Field Theory. Comprehensive hints, crucial formulas, and rigorous CBT practice based on Sadiku and FUTA past questions.</p>
+        <div class="author-badge">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ)</div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Welcome & Instructions -->
+        <section class="welcome-message">
+            <h2>Welcome, Champions.</h2>
+            <p>Electromagnetic Field Theory is not about memorization; it's about visualization and understanding the fundamental laws that govern the universe. This portal is designed to break down the complexities of EEE 303 into highly digestible, exam-focused modules.</p>
+            
+            <p style="margin-top: 10px;">Each module below contains specific <strong>survival hints</strong>, <strong>lecture notes</strong>, and a rigorously programmed <strong>100-Question CBT Engine</strong> designed exactly like your standard exams.</p>
+
+            <div class="instructions">
+                <strong>&#9888; IMPORTANT CBT INSTRUCTIONS:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Multiple Choice & True/False:</strong> Select the most appropriate option.</li>
+                    <li><strong>Fill-in-the-Gaps:</strong> You MUST write your answers in <strong>CAPITAL LETTERS</strong> for the system to grade you correctly. Keep answers to single words or standard short phrases as taught in class.</li>
+                    <li>Questions will shuffle automatically upon retaking a test. Practice until you hit 100%.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Module Navigation Grid -->
+        <section class="module-grid">
+            
+            <!-- Module 1 -->
+            <a href="vector_algebra.html" class="module-card">
+                <h3>Module 1</h3>
+                <p>Vector Algebra & Transformations</p>
+                <span class="btn">Enter Module</span>
+            </a>
+
+            <!-- Module 2 -->
+            <a href="vector_calculus.html" class="module-card">
+                <h3>Module 2</h3>
+                <p>Vector Calculus (The Del Operator)</p>
+                <span class="btn">Enter Module</span>
+            </a>
+
+            <!-- Module 3 -->
+            <a href="electrostatics.html" class="module-card">
+                <h3>Module 3</h3>
+                <p>Electrostatics</p>
+                <span class="btn">Enter Module</span>
+            </a>
+
+            <!-- Module 4 -->
+            <a href="magnetostatics.html" class="module-card">
+                <h3>Module 4</h3>
+                <p>Magnetostatics</p>
+                <span class="btn">Enter Module</span>
+            </a>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>FUTA Excellence Series</strong></p>
+        <p>Curated and Engineered by <strong>Abideen Yakub Opeyemi (Ó'YẸMÍ)</strong></p>
+        <p>Contact / WhatsApp: <strong>07050376975</strong></p>
+    </footer>
+
+</body>
+</html>
