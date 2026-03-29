@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>⚡ EEE 303 War Chest | Theory Master-Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0f2b5e;
+            --primary-dark: #071b3b;
+            --accent: #f39c12;
+            --accent-dark: #e67e22;
+            --bg: #f1f5f9;
+            --surface: #ffffff;
+            --text: #0f172a;
+            --text-light: #334155;
+            --success: #10b981;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --border: #e2e8f0;
+        }
+        body {
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.55;
+            padding: 1.5rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Header Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1e4a8a 100%);
+            color: white;
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 12px 24px -12px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; letter-spacing: -0.5px; text-transform: uppercase; font-weight: 800; }
+        .hero .sub { font-size: 1.1rem; opacity: 0.9; margin-top: 0.8rem; border-top: 1px solid rgba(255,255,255,0.2); display: inline-block; padding-top: 0.5rem; }
+        .credit { margin-top: 1.2rem; font-size: 0.85rem; background: rgba(0,0,0,0.2); display: inline-block; padding: 0.4rem 1.2rem; border-radius: 40px; }
+        .home-btn {
+            display: inline-flex; align-items: center; gap: 0.5rem; background: var(--accent); color: #2c3e2f;
+            text-decoration: none; font-weight: bold; padding: 0.6rem 1.5rem; border-radius: 40px; margin-top: 1.5rem;
+            transition: all 0.2s ease; font-size: 0.9rem;
+        }
+        .home-btn:hover { background: var(--accent-dark); color: white; transform: translateY(-2px); }
+
+        /* Card Layouts */
+        .card { background: var(--surface); border-radius: 1.5rem; box-shadow: 0 8px 20px rgba(0,0,0,0.05); margin-bottom: 2rem; overflow: hidden; border: 1px solid var(--border); }
+        .card-header { background: var(--surface); padding: 1.2rem 1.8rem; border-bottom: 4px solid var(--accent); }
+        .card-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .card-body { padding: 1.8rem; }
+
+        /* Navigator Specifics */
+        .focus-area { background: #fff7ed; border-left: 5px solid #f97316; padding: 1.5rem; border-radius: 0 1rem 1rem 0; margin-bottom: 1.5rem; }
+        .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin: 1.5rem 0; }
+        .focus-card { padding: 1.2rem; border-radius: 1rem; border-left: 5px solid; }
+        
+        /* Question & Solution Blocks */
+        .question-block { margin-bottom: 2.5rem; border-bottom: 1px dashed var(--border); padding-bottom: 1.8rem; }
+        .q-title { font-weight: 800; font-size: 1.1rem; color: var(--primary); background: #eef2ff; padding: 0.3rem 1rem; border-radius: 40px; margin-bottom: 1rem; display: inline-block; }
+        .question-text { font-weight: 500; margin-bottom: 1rem; background: #f8fafc; padding: 1.2rem; border-radius: 1rem; border-left: 4px solid var(--info); }
+        .solution { background: #fefce8; border-radius: 1rem; padding: 1.5rem; border: 1px solid #fde68a; }
+        .step { margin-bottom: 1rem; }
+        .math { background: #e0e7ff; font-family: 'Courier New', monospace; padding: 0.2rem 0.5rem; border-radius: 6px; font-weight: 600; color: #1e3a8a; }
+        .final { background: #dcfce7; padding: 0.6rem 1.2rem; border-radius: 12px; font-weight: bold; color: #166534; border-left: 4px solid #22c55e; margin-top: 1rem; display: inline-block; }
+        .trap { background: #fee2e2; border-left: 5px solid var(--danger); padding: 1rem; border-radius: 1rem; margin: 1rem 0; color: #991b1b; font-size: 0.95rem; }
+
+        /* Practice List */
+        .practice-list { list-style: none; counter-reset: p-count; }
+        .practice-list li { counter-increment: p-count; margin-bottom: 1rem; padding: 1rem; background: #f9fafb; border-radius: 1rem; border: 1px solid #eef2ff; transition: 0.2s; }
+        .practice-list li::before { content: counter(p-count) "."; font-weight: 800; color: var(--accent); margin-right: 15px; background: #fff3e0; display: inline-block; width: 2rem; text-align: center; border-radius: 50%; }
+        .practice-list li:hover { border-color: var(--accent); background: #fff; transform: translateX(5px); }
+
+        @media (max-width: 768px) { body { padding: 0.8rem; } .hero h1 { font-size: 1.8rem; } .focus-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+<div class="container">
+    
+    <header class="hero">
+        <h1>🚀 EEE 303 THEORY MASTER-GUIDE</h1>
+        <div class="sub">Strategic Exam Navigator • Solved Problems • Theory Practice Bank</div>
+        <br>
+        <div class="credit">✍️ Curated by Abideen Yakub Opeyemi (Ó'YẸMÍ) | 07050376975</div>
+        <br>
+        <a href="index.html" class="home-btn">🏠 RETURN TO COMMAND CENTER</a>
+    </header>
+
+    <!-- SECTION 1: STRATEGIC NAVIGATOR -->
+    <div class="card" style="border-top-color: var(--danger);">
+        <div class="card-header">
+            <h2>💡 O'YEMÍ’S STRATEGIC HINTS & EXPECTATIONS</h2>
+        </div>
+        <div class="card-body">
+            <div class="focus-area">
+                <h3>📝 The "Full Marks" Protocol</h3>
+                <p>FUTA EEE lecturers prioritize <strong>Process</strong> over the final number. To secure maximum marks in theory:</p>
+                <ul style="margin: 1rem 0 0 1.5rem;">
+                    <li><strong>Cite the Principle:</strong> Always start with "By Gauss's Law..." or "Using Stokes' Theorem..."</li>
+                    <li><strong>Standard Units:</strong> Never omit V/m, C/m², or A/m. A missing unit can cost 0.5 marks.</li>
+                    <li><strong>The Sketch Advantage:</strong> Draw the Gaussian Surface or the coordinate planes. It proves you aren't just memorizing formulas.</li>
+                </ul>
+            </div>
+
+            <div class="focus-grid">
+                <div class="focus-card" style="background: #f0f9ff; border-left-color: #0284c7;">
+                    <h3 style="color: #075985;">🔄 Integration Mastery</h3>
+                    <p>Expect triple integrals. Master the differential volumes (<span class="math">dv</span>):
+                        <br>• <strong>Cylindrical:</strong> ρ dρ dφ dz
+                        <br>• <strong>Spherical:</strong> r² sinθ dr dθ dφ
+                    </p>
+                </div>
+                <div class="focus-card" style="background: #fdf2f8; border-left-color: #db2777;">
+                    <h3 style="color: #9d174d;">📐 Vector Transformation</h3>
+                    <p>Direct substitution of coordinates is a <strong>trap</strong>. You must apply the <strong>Dot Product Matrix</strong> to transform the unit vectors themselves (<span class="math">a<sub>x</sub>, a<sub>y</sub></span> to <span class="math">a<sub>ρ</sub>, a<sub>φ</sub></span>).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: SOLVED PAST QUESTIONS -->
+    <div class="card">
+        <div class="card-header">
+            <h2>📘 STEP-BY-STEP EXAM SOLUTIONS</h2>
+        </div>
+        <div class="card-body">
+            
+            <div class="question-block">
+                <div class="q-title">Q1 · Coordinate Transformation (Point & Vector)</div>
+                <div class="question-text">Given point P(-2, 6, 3) and vector A = y a<sub>x</sub> + (x+z) a<sub>y</sub>. Express P and A in cylindrical coordinates and evaluate A at P.</div>
+                <div class="solution">
+                    <div class="step"><strong>Step 1: Point P to (ρ, φ, z)</strong><br>
+                        ρ = √((-2)² + 6²) = √40 ≈ 6.32 | φ = tan⁻¹(6/-2) = 108.43° (QII) | z = 3.
+                    </div>
+                    <div class="step"><strong>Step 2: Evaluate Cartesian Components at P</strong><br>
+                        A<sub>x</sub> = y = 6 | A<sub>y</sub> = x+z = -2+3 = 1.
+                    </div>
+                    <div class="step"><strong>Step 3: Transform Vector using Matrix</strong><br>
+                        A<sub>ρ</sub> = 6cos(108.43°) + 1sin(108.43°) = -0.95<br>
+                        A<sub>φ</sub> = -6sin(108.43°) + 1cos(108.43°) = -6.01
+                        <div class="final">A(cyl) = -0.95a<sub>ρ</sub> - 6.01a<sub>φ</sub></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="question-block">
+                <div class="q-title">Q2 · Electrostatic Vector Force</div>
+                <div class="question-text">Q₁=50μC at (-1, 1, -3) and Q₂=10μC at (3, 1, 0). Find vector force ON Q₁.</div>
+                <div class="solution">
+                    <div class="trap">⚠️ TRICK: Force ON Q₁ requires vector FROM Q₂ TO Q₁ (R₂₁).</div>
+                    <div class="step"><strong>Step 1: R vector & Magnitude</strong><br>
+                        R₂₁ = (-1-3)a<sub>x</sub> + (1-1)a<sub>y</sub> + (-3-0)a<sub>z</sub> = -4a<sub>x</sub> - 3a<sub>z</sub>. | |R| = 5m.
+                    </div>
+                    <div class="step"><strong>Step 2: Coulomb's Calculation</strong><br>
+                        F = [ (9e9)(50e-6)(10e-6) / 5² ] * (-0.8a<sub>x</sub> - 0.6a<sub>z</sub>) = 0.18 * (-0.8a<sub>x</sub> - 0.6a<sub>z</sub>).
+                        <div class="final">F = -0.144a<sub>x</sub> - 0.108a<sub>z</sub> N (|F| = 0.18N)</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- SECTION 3: 30-QUESTION PRACTICE BANK -->
+    <div class="card">
+        <div class="card-header">
+            <h2>✍️ O'YEMI'S 30-QUESTION PRACTICE BANK</h2>
+        </div>
+        <div class="card-body">
+            <ol class="practice-list">
+                <li>Find the divergence of the position vector <strong>r</strong> = x i + y j + z k.</li>
+                <li>Prove mathematically that ∇·(∇V) is equivalent to the Laplacian ∇²V.</li>
+                <li>Evaluate the curl of F = 30 i + 2xy j + 5xz² k at point (1, 1, -0.2).</li>
+                <li>Derive the differential form of Gauss's Law (∇·D = ρv) from the integral form.</li>
+                <li>Calculate the volume charge density ρv if D = (2y² + z)a<sub>x</sub> + 4xy a<sub>y</sub> + x a<sub>z</sub>.</li>
+                <li>Using Gauss's law, find the total charge enclosed in a unit cube 0 ≤ x,y,z ≤ 1 for the field in Q5.</li>
+                <li>State the boundary conditions for the tangential component of E across two dielectrics.</li>
+                <li>Determine the electric field E due to an infinite line charge ρ<sub>L</sub> along the z-axis.</li>
+                <li>Show that the magnetic flux density B is solenoidal (∇·B = 0) and explain the physical meaning.</li>
+                <li>Use Ampere's law to derive the magnetic field intensity H of an infinite straight wire.</li>
+                <li>Calculate the magnetic flux ψ through a surface x=4, 0≤y≤2, 0≤z≤3 for B = 3x a<sub>x</sub>.</li>
+                <li>Explain why the work done by a static magnetic field on a moving charge is always zero.</li>
+                <li>State Stokes' Theorem and explain its role in converting a line integral to a surface integral.</li>
+                <li>Find the current density J given H = (2y - z)a<sub>x</sub> + (x + 3z)a<sub>y</sub> + (4x - y)a<sub>z</sub>.</li>
+                <li>Two infinite sheets of charge are at z=0 and z=2 with density ρ<sub>s</sub>. Find E in all regions.</li>
+                <li>Given V = (10/r²)sinθ cosφ, find the electric flux density D at (2, π/2, 0).</li>
+                <li>Define an "Irrotational Field" and provide a mathematical test for it.</li>
+                <li>Compute the circulation of B = ρsinφ a<sub>ρ</sub> around a circle of radius ρ=2.</li>
+                <li>Explain the concept of "Relaxation Time" in conductors.</li>
+                <li>Derive Poisson’s Equation from the point form of Gauss’s Law.</li>
+                <li>Find the energy stored in a parallel-plate capacitor with area A and separation d.</li>
+                <li>State the Lorentz Force equation and identify each component.</li>
+                <li>Explain why electric potential V is a scalar while E is a vector.</li>
+                <li>Calculate the unit vector normal to the surface x² + y² + z² = 9 at (0, 0, 3).</li>
+                <li>Distinguish between Conduction Current and Displacement Current.</li>
+                <li>Define Magnetic Vector Potential (A) and relate it to B.</li>
+                <li>Find the force between two parallel wires carrying current I in opposite directions.</li>
+                <li>Verify the Divergence Theorem for D = 4x a<sub>x</sub> in a cube of side 1.</li>
+                <li>Explain why the line integral of an electrostatic field around a closed path is zero.</li>
+                <li>Describe the variables of the Spherical coordinate system and their standard ranges.</li>
+            </ol>
+            <div class="trap" style="margin-top: 2rem;">
+                📌 <strong>Final Tip:</strong> Practice the <strong>Curl determinant</strong> for cylindrical coordinates. It is the most common mathematical error in EEE 303 theory exams.
+            </div>
+        </div>
+    </div>
+
+    <footer style="text-align: center; color: #64748b; font-size: 0.85rem; padding: 2rem 0;">
+        ⚡ EEE 303 War Chest · FUTA Excellence Series · engineered by Ó'YẸMÍ
+    </footer>
+</div>
+</body>
+</html>
