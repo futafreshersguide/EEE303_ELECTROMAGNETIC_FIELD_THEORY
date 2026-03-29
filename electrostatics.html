@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Electrostatics - EEE 303 War Chest</title>
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #f59e0b;
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1a;
+            --card-bg: #ffffff;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            max-width: 1000px; 
+            margin: auto; 
+            padding: 20px; 
+            color: var(--text-color); 
+            background-color: var(--bg-color);
+        }
+        .header-box {
+            background: linear-gradient(135deg, var(--primary-color), #2563eb);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        .header-box h1 { text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; }
+        .header-box p { font-style: italic; color: #e0e7ff; }
+        .nav-btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: #78350f;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background-color: #d97706; color: white; }
+        
+        .section-card { 
+            background-color: var(--card-bg); 
+            border-left: 8px solid var(--primary-color); 
+            border-radius: 10px; 
+            padding: 25px; 
+            margin-bottom: 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+        }
+        .section-card h2 { color: var(--primary-color); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; font-size: 1.8em; }
+        .concept-title { font-weight: 800; color: #d97706; font-size: 1.25em; display: block; margin-top: 20px; margin-bottom: 10px; }
+        .math-block { 
+            font-family: 'Courier New', Courier, monospace; 
+            background-color: #e0e7ff; 
+            padding: 10px; 
+            border-radius: 6px; 
+            color: #312e81; 
+            font-weight: bold; 
+            display: block;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .trap-box { background-color: #fef2f2; border-left: 5px solid #ef4444; padding: 15px; margin: 15px 0; color: #991b1b; }
+        ul { margin-top: 5px; padding-left: 25px; }
+        li { margin-bottom: 10px; }
+
+        /* Quiz Styles */
+        #quiz-section { background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 8px solid #10b981; margin-top: 40px; }
+        .quiz-header { text-align: center; color: #10b981; margin-bottom: 10px; }
+        .quiz-instructions { text-align: center; background-color: #ecfdf5; padding: 10px; border: 1px dashed #10b981; margin-bottom: 25px; color: #065f46; font-weight: bold; }
+        .question-block { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0; }
+        .question-text { font-weight: bold; font-size: 1.1em; margin-bottom: 10px; color: #1e3a8a; }
+        .options-list { list-style-type: none; padding-left: 0; }
+        .options-list li { margin-bottom: 8px; }
+        .options-list label { cursor: pointer; padding: 5px; display: inline-block; width: 100%; border-radius: 4px; transition: background 0.2s; }
+        .options-list label:hover { background-color: #f1f5f9; }
+        .fill-blank-input { padding: 10px; width: 80%; border: 2px solid #cbd5e1; border-radius: 4px; font-size: 1.1em; text-transform: uppercase; }
+        .fill-blank-input:focus { border-color: var(--primary-color); outline: none; }
+        button { background-color: var(--primary-color); color: white; border: none; padding: 12px 25px; font-size: 1.1em; border-radius: 5px; cursor: pointer; display: block; margin: 20px auto; font-weight: bold; }
+        button:hover { background-color: #1e40af; }
+        #results-container { display: none; text-align: center; padding: 20px; background-color: #f8fafc; border-radius: 8px; border: 2px dashed #10b981; margin-top: 20px; }
+        .correct { color: #16a34a; font-weight: bold; }
+        .incorrect { color: #dc2626; font-weight: bold; }
+        .feedback { font-size: 0.9em; margin-top: 5px; }
+        .image-container { text-align: center; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="header-box">
+        <h1>MODULE 3: ELECTROSTATICS</h1>
+        <p>Charges at Rest, Coulomb's Law, Gauss's Law & Electric Potential</p>
+        <p style="font-size: 0.9em; margin-top: 5px;">Prepared by Abideen Yakub Opeyemi (Ó'YẸMÍ) | 07050376975</p>
+        <a href="index.html" class="nav-btn">&larr; Back to Home</a>
+    </div>
+
+    <div class="section-card">
+        <h2>Exploratory Notes & Essential Formulas</h2>
+        <p>Electrostatics deals with charges that are stationary ($v = 0$). This means there are no magnetic fields generated by these charges, only electric fields. http://googleusercontent.com/image_content/295
+
+</p>
+
+        <div class="concept-title">1. Coulomb's Law & Electric Field Intensity (E)</div>
+        <ul>
+            <li><strong>Coulomb's Law:</strong> The force between two point charges is directly proportional to the product of the charges and inversely proportional to the square of the distance between them.
+            <span class="math-block">F = (Q_1 Q_2) / (4&pi;&epsilon;_o R^2) a_R</span></li>
+            <li><strong>Electric Field Intensity (E):</strong> The force per unit charge. Measured in Volts/meter (V/m).
+            <span class="math-block">E = F / Q = Q / (4&pi;&epsilon;_o R^2) a_R</span></li>
+        </ul>
+
+        <div class="concept-title">2. Standard Charge Distributions (MEMORIZE THESE)</div>
+        <p>Sadiku loves testing you on infinite charge configurations. Do not waste time deriving them in the exam; know the end formulas.</p>
+        <ul>
+            <li><strong>Infinite Line Charge (&rho;_L):</strong> The field radiates outward in a cylinder. It decreases as $1/\rho$ (NOT $1/r^2$).
+            <span class="math-block">E = &rho;_L / (2&pi;&epsilon;_o &rho;) a_&rho;</span></li>
+            <li><strong>Infinite Sheet of Charge (&rho;_S):</strong> The field is uniform everywhere! It does NOT decrease with distance.
+            <span class="math-block">E = &rho;_S / (2&epsilon;_o) a_n</span></li>
+        </ul>
+
+        <div class="concept-title">3. Electric Flux Density (D) & Gauss's Law</div>
+        <p>Electric flux density ($D$) is independent of the medium (permittivity $\epsilon$), unlike $E$ which gets weaker in a dielectric. http://googleusercontent.com/image_content/323
+
+</p>
+        <ul>
+            <li><strong>Relation:</strong> <span class="math-block">D = &epsilon; E = &epsilon;_o &epsilon;_r E</span></li>
+            <li><strong>Gauss's Law (Integral Form):</strong> The total outward flux through a closed surface equals the total charge enclosed.
+            <span class="math-block">&oint; D &middot; dS = Q_enc = &int; &rho;_v dv</span></li>
+            <li><strong>Gauss's Law (Differential Form):</strong> The divergence of D equals the volume charge density at that point.
+            <span class="math-block">&nabla; &middot; D = &rho;_v</span></li>
+        </ul>
+
+        <div class="concept-title">4. Electric Potential (V) & Work Done</div>
+        <p>The electrostatic field is conservative. Moving a charge from point A to point B does not depend on the path taken.</p>
+        <ul>
+            <li><strong>Work Done:</strong> <span class="math-block">W = -Q &int; E &middot; dl = Q(V_B - V_A)</span></li>
+            <li><strong>Maxwell's Equation for E:</strong> Because the field is conservative, the work done in a closed loop is zero.
+            <span class="math-block">&oint; E &middot; dl = 0</span> (Integral Form)<br>
+            <span class="math-block">&nabla; &times; E = 0</span> (Differential Form &rarr; The field is irrotational)</li>
+            <li><strong>E and V Relation:</strong> <span class="math-block">E = -&nabla;V</span></li>
+        </ul>
+
+        <div class="trap-box">
+            <strong>&#9888; O'YEMI'S BOUNDARY CONDITION TRAPS:</strong><br>
+            When an electric field crosses the boundary between two different media:<br>
+            1. The <strong>Tangential</strong> component of E is continuous: $E_{t1} = E_{t2}$.<br>
+            2. The <strong>Normal</strong> component of D is discontinuous if there is a surface charge: $D_{n1} - D_{n2} = \rho_S$. (If no surface charge, $D_{n1} = D_{n2}$).<br>
+            3. Inside a perfect conductor, $E = 0$ and $\rho_v = 0$. All charge resides strictly on the surface!
+        </div>
+    </div>
+
+    <div id="quiz-section">
+        <h2 class="quiz-header">&#127919; MODULE 3: ELECTROSTATICS EXAM SIMULATOR</h2>
+        <div class="quiz-instructions">
+            READ CAREFULLY: For "Fill-in-the-gap" questions, you MUST type your answer in CAPITAL LETTERS (e.g., CONSTANT, ZERO).<br>
+            You will face 25 randomly selected questions from the master bank per attempt.
+        </div>
+        
+        <div id="quiz-container"></div>
+
+        <button id="submit-btn" onclick="gradeQuiz()">Submit Exam</button>
+
+        <div id="results-container">
+            <h2 id="score-display"></h2>
+            <p id="score-message"></p>
+            <button onclick="loadQuiz()">Retake Quiz (Shuffle New Questions)</button>
+        </div>
+    </div>
+
+    <script>
+        // O'yemi's Electrostatics Master Bank (75+ Dense Questions)
+        const questionBank = [
+            // TRUE/FALSE
+            { type: 'tf', q: 'The electric field inside a solid perfect conductor in electrostatic equilibrium is always zero.', a: 'True' },
+            { type: 'tf', q: 'Electric potential is a vector quantity.', a: 'False' },
+            { type: 'tf', q: 'The electrostatic field is a conservative field.', a: 'True' },
+            { type: 'tf', q: 'The electric field due to an infinite line charge decreases as 1/r² with distance r.', a: 'False' },
+            { type: 'tf', q: 'A uniformly charged infinite plane produces an electric field that depends on the distance from the plane.', a: 'False' },
+            { type: 'tf', q: 'Electric field lines can form closed loops.', a: 'False' },
+            { type: 'tf', q: 'Electric monopoles can exist in nature.', a: 'True' },
+            { type: 'tf', q: 'The work done in moving a charge around a closed path in an electrostatic field is zero.', a: 'True' },
+            { type: 'tf', q: 'Electric flux density D depends on the permittivity of the medium.', a: 'False' },
+            { type: 'tf', q: 'Electric field intensity E depends on the permittivity of the medium.', a: 'True' },
+            { type: 'tf', q: 'The tangential component of an electric field is continuous across a dielectric boundary.', a: 'True' },
+            { type: 'tf', q: 'The normal component of the electric flux density D is continuous across a boundary if there is no surface charge.', a: 'True' },
+            { type: 'tf', q: 'Energy density in an electrostatic field is proportional to the square of the electric field intensity.', a: 'True' },
+            { type: 'tf', q: 'The divergence of the electric field intensity E is always zero.', a: 'False' },
+            { type: 'tf', q: 'The curl of the electric field intensity E is always zero.', a: 'True' },
+            { type: 'tf', q: 'Two equipotential surfaces can intersect each other.', a: 'False' },
+            { type: 'tf', q: 'Electric field lines are always perpendicular to an equipotential surface.', a: 'True' },
+            { type: 'tf', q: 'Gauss\'s law is most useful when the charge distribution lacks any symmetry.', a: 'False' },
+            { type: 'tf', q: 'The electric field just outside a charged conductor is always perpendicular to its surface.', a: 'True' },
+            { type: 'tf', q: 'If the electric potential V is constant throughout a region, the electric field E in that region is zero.', a: 'True' },
+            { type: 'tf', q: 'The capacitance of a parallel plate capacitor increases if the distance between the plates increases.', a: 'False' },
+            { type: 'tf', q: 'The capacitance of a parallel plate capacitor increases if a dielectric material is inserted between the plates.', a: 'True' },
+            { type: 'tf', q: 'Dielectric breakdown occurs when the electric field inside a material exceeds its dielectric strength.', a: 'True' },
+            { type: 'tf', q: 'A dipole consists of two equal and opposite point charges separated by a small distance.', a: 'True' },
+
+            // MULTIPLE CHOICE
+            { type: 'mcq', q: 'The differential form of Gauss\'s Law for electrostatics is:', options: ['∇ × E = 0', '∇ · D = ρv', '∇ · B = 0', '∇ × H = J'], a: '∇ · D = ρv' },
+            { type: 'mcq', q: 'In electrostatics, the electric field E is derived from the electric potential V using which relationship?', options: ['E = ∇V', 'E = -∇V', 'E = ∇ × V', 'E = ∇ · V'], a: 'E = -∇V' },
+            { type: 'mcq', q: 'What happens to the electric field intensity between two parallel plates if the distance between them decreases?', options: ['It increases', 'It decreases', 'It remains the same', 'It becomes zero'], a: 'It increases' },
+            { type: 'mcq', q: 'What fundamental law governs the behavior of stationary electrostatic charges?', options: ['Faraday\'s law', 'Ampere\'s law', 'Coulomb\'s law', 'Lenz\'s law'], a: 'Coulomb\'s law' },
+            { type: 'mcq', q: 'The relation D = εE states that the electric flux density depends on:', options: ['Permeability', 'Permittivity', 'Conductivity', 'Resistivity'], a: 'Permittivity' },
+            { type: 'mcq', q: 'Electric field lines always originate from:', options: ['Negative charges', 'Neutral charges', 'Positive charges', 'Infinity'], a: 'Positive charges' },
+            { type: 'mcq', q: 'Which equation proves that the electrostatic field is irrotational?', options: ['∇ · D = ρv', '∇ × E = 0', '∇ · B = 0', '∇ × H = J'], a: '∇ × E = 0' },
+            { type: 'mcq', q: 'The electric field distribution around an infinitely long line charge is:', options: ['Spherical', 'Cylindrical', 'Planar', 'Cubical'], a: 'Cylindrical' },
+            { type: 'mcq', q: 'The electric potential due to a point charge decreases with distance r as:', options: ['1/r²', '1/r', '1/r³', 'It is constant'], a: '1/r' },
+            { type: 'mcq', q: 'The electric field due to a point charge decreases with distance r as:', options: ['1/r²', '1/r', '1/r³', 'It is constant'], a: '1/r²' },
+            { type: 'mcq', q: 'The electric field due to an electric dipole decreases with distance r (far away) as:', options: ['1/r²', '1/r', '1/r³', '1/r⁴'], a: '1/r³' },
+            { type: 'mcq', q: 'What is the unit of Electric Flux Density (D)?', options: ['Volts/meter', 'Coulombs/meter²', 'Coulombs', 'Farads/meter'], a: 'Coulombs/meter²' },
+            { type: 'mcq', q: 'What is the unit of Electric Field Intensity (E)?', options: ['Volts/meter', 'Coulombs/meter²', 'Coulombs', 'Farads'], a: 'Volts/meter' },
+            { type: 'mcq', q: 'The boundary condition for the tangential component of the electric field (Et) across two dielectrics is:', options: ['Et1 - Et2 = ρs', 'Et1 = Et2', 'Et1 = 0', 'ε1 Et1 = ε2 Et2'], a: 'Et1 = Et2' },
+            { type: 'mcq', q: 'Gauss\'s Law is most useful for calculating E when:', options: ['The charge distribution has no symmetry', 'The charge distribution has high symmetry', 'The field is non-conservative', 'The potential V is known'], a: 'The charge distribution has high symmetry' },
+            { type: 'mcq', q: 'The equation ∇²V = -ρv/ε is known as:', options: ['Laplace\'s equation', 'Poisson\'s equation', 'Maxwell\'s equation', 'Continuity equation'], a: 'Poisson\'s equation' },
+            { type: 'mcq', q: 'If the volume charge density is zero in a region, Poisson\'s equation reduces to:', options: ['Maxwell\'s equation', 'Laplace\'s equation', 'Coulomb\'s equation', 'Gauss\'s equation'], a: 'Laplace\'s equation' },
+            { type: 'mcq', q: 'The energy stored in a capacitor C with voltage V is:', options: ['CV²', '1/2 CV', '1/2 CV²', 'C/V'], a: '1/2 CV²' },
+            { type: 'mcq', q: 'Which of the following is an example of a boundary value problem?', options: ['Solving Laplace\'s equation for potential', 'Calculating E from Coulomb\'s law', 'Finding the cross product of vectors', 'Evaluating a line integral'], a: 'Solving Laplace\'s equation for potential' },
+
+            // FILL IN THE GAPS (Strictly mapped to CAPITAL letters)
+            { type: 'fill', q: 'The field of an infinite sheet of charge is ___________ regardless of the distance from the sheet.', a: 'CONSTANT' },
+            { type: 'fill', q: 'The unit of electric flux is the ___________.', a: 'COULOMB' },
+            { type: 'fill', q: 'The unit of electric potential is the ___________.', a: 'VOLT' },
+            { type: 'fill', q: 'The unit of capacitance is the ___________.', a: 'FARAD' },
+            { type: 'fill', q: 'Gauss\'s law states that the total outward flux through a closed surface is equal to the total ___________ enclosed.', a: 'CHARGE' },
+            { type: 'fill', q: 'Because the electrostatic field is conservative, its line integral around a closed path evaluates exactly to ___________.', a: 'ZERO' },
+            { type: 'fill', q: 'Electric field lines are always ___________ to the surface of a perfect conductor.', a: 'PERPENDICULAR' },
+            { type: 'fill', q: 'Two point charges of the same sign will experience a ___________ force.', a: 'REPULSIVE' },
+            { type: 'fill', q: 'Two point charges of opposite signs will experience an ___________ force.', a: 'ATTRACTIVE' },
+            { type: 'fill', q: 'Coulomb\'s law states that the force between two point charges is inversely proportional to the ___________ of the distance between them.', a: 'SQUARE' },
+            { type: 'fill', q: 'Electric field lines originate from positive charges and terminate on ___________ charges.', a: 'NEGATIVE' },
+            { type: 'fill', q: 'The potential difference between two points on the same equipotential surface is ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The electric field inside a perfect conductor under static conditions is completely ________.', a: 'ZERO' },
+            { type: 'fill', q: 'The mathematical equation E = -∇V implies the field is the negative ________ of the potential.', a: 'GRADIENT' },
+            { type: 'fill', q: 'The relationship between electric flux density D and electric field intensity E depends on the ________ of the medium.', a: 'PERMITTIVITY' },
+            { type: 'fill', q: 'If ∇ × E = 0, the electrostatic field is said to be ________.', a: 'IRROTATIONAL' },
+            { type: 'fill', q: 'The theorem used to derive the differential form of Gauss\'s Law from its integral form is the ________ theorem.', a: 'DIVERGENCE' },
+            { type: 'fill', q: 'The ratio of charge Q to potential difference V is defined as the ________ of a capacitor.', a: 'CAPACITANCE' },
+            { type: 'fill', q: 'A material that restricts the free flow of electric charge is called a ________.', a: 'DIELECTRIC' },
+            { type: 'fill', q: 'The maximum electric field a dielectric can withstand without breaking down is called its dielectric ________.', a: 'STRENGTH' },
+            { type: 'fill', q: 'At a boundary between two dielectrics, the ________ component of the electric field intensity is continuous.', a: 'TANGENTIAL' },
+            { type: 'fill', q: 'At a boundary between two dielectrics, the ________ component of the electric flux density is discontinuous by the surface charge density.', a: 'NORMAL' },
+            { type: 'fill', q: 'The divergence of the electric flux density D yields the ________ charge density.', a: 'VOLUME' },
+            { type: 'fill', q: 'The surface integral of electric flux density over a closed surface yields the ________ enclosed.', a: 'CHARGE' },
+            { type: 'fill', q: 'Electric field intensity is defined as the electric force experienced per unit ________.', a: 'CHARGE' }
+        ];
+
+        let currentQuestions = [];
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = ''; 
+            document.getElementById('results-container').style.display = 'none';
+            document.getElementById('submit-btn').style.display = 'block';
+
+            currentQuestions = [...questionBank];
+            shuffleArray(currentQuestions);
+            currentQuestions = currentQuestions.slice(0, 25); 
+
+            currentQuestions.forEach((q, index) => {
+                const qBlock = document.createElement('div');
+                qBlock.className = 'question-block';
+                
+                let html = `<div class="question-text">${index + 1}. ${q.q}</div>`;
+
+                if (q.type === 'tf') {
+                    html += `
+                        <ul class="options-list">
+                            <li><label><input type="radio" name="q${index}" value="True"> True</label></li>
+                            <li><label><input type="radio" name="q${index}" value="False"> False</label></li>
+                        </ul>
+                    `;
+                } else if (q.type === 'mcq') {
+                    let options = [...q.options];
+                    shuffleArray(options); 
+                    html += `<ul class="options-list">`;
+                    options.forEach(opt => {
+                        html += `<li><label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label></li>`;
+                    });
+                    html += `</ul>`;
+                } else if (q.type === 'fill') {
+                    html += `<input type="text" class="fill-blank-input" name="q${index}" placeholder="TYPE IN CAPITAL LETTERS...">`;
+                }
+
+                html += `<div id="feedback-${index}" class="feedback"></div>`;
+                qBlock.innerHTML = html;
+                container.appendChild(qBlock);
+            });
+        }
+
+        function gradeQuiz() {
+            let score = 0;
+            const total = currentQuestions.length;
+
+            currentQuestions.forEach((q, index) => {
+                const feedbackEl = document.getElementById(`feedback-${index}`);
+                let userAnswer = '';
+
+                if (q.type === 'tf' || q.type === 'mcq') {
+                    const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                    if (selected) userAnswer = selected.value;
+                } else if (q.type === 'fill') {
+                    const input = document.querySelector(`input[name="q${index}"]`);
+                    userAnswer = input.value.trim();
+                }
+
+                let isCorrect = false;
+                if (q.type === 'fill') {
+                    if (userAnswer === q.a) {
+                        isCorrect = true;
+                    } else if (userAnswer.toUpperCase() === q.a) {
+                        isCorrect = false; 
+                    }
+                } else {
+                    if (userAnswer === q.a) isCorrect = true;
+                }
+
+                if (isCorrect) {
+                    score++;
+                    feedbackEl.innerHTML = `<span class="correct">✔ Correct!</span>`;
+                } else {
+                    if (q.type === 'fill' && userAnswer.toUpperCase() === q.a) {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect! You did not use CAPITAL LETTERS. The exact answer is: <strong>${q.a}</strong></span>`;
+                    } else {
+                        feedbackEl.innerHTML = `<span class="incorrect">✘ Incorrect. The correct answer is: <strong>${q.a}</strong></span>`;
+                    }
+                }
+            });
+
+            document.getElementById('submit-btn').style.display = 'none';
+            const resultsBox = document.getElementById('results-container');
+            resultsBox.style.display = 'block';
+            
+            const percentage = Math.round((score / total) * 100);
+            document.getElementById('score-display').innerText = `You scored ${score} out of ${total} (${percentage}%)`;
+            
+            let msg = '';
+            if (percentage >= 80) msg = "Excellent! You are an Electrostatics Master! 🔥";
+            else if (percentage >= 50) msg = "Good effort, but review Coulomb's and Gauss's Laws again. 📖";
+            else msg = "Keep practicing! Don't let Boundary Conditions and potentials defeat you! ⚔️";
+            
+            document.getElementById('score-message').innerText = msg;
+        }
+
+        window.onload = loadQuiz;
+    </script>
+
+</body>
+</html>
