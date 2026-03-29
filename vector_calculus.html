@@ -92,7 +92,6 @@
     </style>
 </head>
 <body>
-
     <div class="header-box">
         <h1>MODULE 2: VECTOR CALCULUS</h1>
         <p>The Del Operator, Gradient, Divergence, Curl & The Great Theorems</p>
@@ -105,43 +104,67 @@
         <h2>Exploratory Notes & Essential Formulas</h2>
         <p>Vector calculus is the heartbeat of electromagnetic theory. It explains how electric and magnetic fields change over space. The secret to mastering EEE 303 is understanding the <strong>scale factors</strong> ($h_1, h_2, h_3$). If you know the scale factors, you never have to memorize the complex formulas for Divergence and Curl in Cylindrical and Spherical coordinates!</p>
 
-        <div class="concept-title">1. The Secret Cheat Code: Scale Factors (h₁, h₂, h₃)</div>
+        <div class="concept-title">1. The Secret Cheat Code: Scale Factors ($h_1, h_2, h_3$)</div>
         <p>Because Cylindrical and Spherical coordinate systems are curved, a small change in an angle (like $d\phi$) doesn't translate to a straight-line distance unless you multiply it by a radius. These multipliers are the scale factors.</p>
         <ul>
-            <li><strong>Cartesian (x, y, z):</strong> No curves. Scale factors are: <strong>$h_1 = 1$, $h_2 = 1$, $h_3 = 1$</strong>.</li>
-            <li><strong>Cylindrical (&rho;, &phi;, z):</strong> The $\phi$ direction is curved by radius $\rho$. Scale factors are: <strong>$h_1 = 1$, $h_2 = \rho$, $h_3 = 1$</strong>.</li>
-            <li><strong>Spherical (r, &theta;, &phi;):</strong> The $\theta$ direction is curved by $r$, and the $\phi$ direction is curved by $r\sin\theta$. Scale factors are: <strong>$h_1 = 1$, $h_2 = r$, $h_3 = r\sin\theta$</strong>.</li>
+            <li><strong>Cartesian ($x, y, z$):</strong> No curves. Scale factors are: <strong>$h_1 = 1$, $h_2 = 1$, $h_3 = 1$</strong>.</li>
+            <li><strong>Cylindrical ($\rho, \phi, z$):</strong> The $\phi$ direction is curved by radius $\rho$. Scale factors are: <strong>$h_1 = 1$, $h_2 = \rho$, $h_3 = 1$</strong>.</li>
+            <li><strong>Spherical ($r, \theta, \phi$):</strong> The $\theta$ direction is curved by $r$, and the $\phi$ direction is curved by $r\sin\theta$. Scale factors are: <strong>$h_1 = 1$, $h_2 = r$, $h_3 = r\sin\theta$</strong>.</li>
         </ul>
 
-        <div class="concept-title">2. The Gradient (&nabla;V)</div>
+        <div class="concept-title">2. The Gradient ($\nabla V$)</div>
         <p>The gradient operates on a <strong>scalar field</strong> ($V$) to produce a <strong>vector</strong>. It represents the maximum spatial rate of increase of that scalar. Physically, the gradient vector always points exactly perpendicular (normal) to equipotential surfaces.</p>
         
         <ul>
-            <li><strong>Cartesian:</strong> <span class="math-block">&nabla;V = (&part;V/&part;x)a<sub>x</sub> + (&part;V/&part;y)a<sub>y</sub> + (&part;V/&part;z)a<sub>z</sub></span></li>
-            <li><strong>Cylindrical:</strong> Note the $1/\rho$ attached to the $\phi$ derivative! <br><span class="math-block">&nabla;V = (&part;V/&part;&rho;)a<sub>&rho;</sub> + (1/&rho;)(&part;V/&part;&phi;)a<sub>&phi;</sub> + (&part;V/&part;z)a<sub>z</sub></span></li>
-            <li><strong>Spherical:</strong> Note the $1/r$ and $1/(r\sin\theta)$! <br><span class="math-block">&nabla;V = (&part;V/&part;r)a<sub>r</sub> + (1/r)(&part;V/&part;&theta;)a<sub>&theta;</sub> + (1/(r sin&theta;))(&part;V/&part;&phi;)a<sub>&phi;</sub></span></li>
+            <li><strong>Cartesian:</strong> 
+                <div class="math-block">
+                $$\nabla V = \frac{\partial V}{\partial x}\mathbf{a}_x + \frac{\partial V}{\partial y}\mathbf{a}_y + \frac{\partial V}{\partial z}\mathbf{a}_z$$
+                </div>
+            </li>
+            <li><strong>Cylindrical:</strong> Note the $1/\rho$ attached to the $\phi$ derivative! <br>
+                <div class="math-block">
+                $$\nabla V = \frac{\partial V}{\partial \rho}\mathbf{a}_\rho + \frac{1}{\rho}\frac{\partial V}{\partial \phi}\mathbf{a}_\phi + \frac{\partial V}{\partial z}\mathbf{a}_z$$
+                </div>
+            </li>
+            <li><strong>Spherical:</strong> Note the $1/r$ and $1/(r\sin\theta)$! <br>
+                <div class="math-block">
+                $$\nabla V = \frac{\partial V}{\partial r}\mathbf{a}_r + \frac{1}{r}\frac{\partial V}{\partial \theta}\mathbf{a}_\theta + \frac{1}{r\sin\theta}\frac{\partial V}{\partial \phi}\mathbf{a}_\phi$$
+                </div>
+            </li>
         </ul>
 
-        <div class="concept-title">3. The Divergence (&nabla; &middot; A)</div>
+        <div class="concept-title">3. The Divergence ($\nabla \cdot \mathbf{A}$)</div>
         <p>Divergence operates on a <strong>vector field</strong> ($\mathbf{A}$) to produce a <strong>scalar</strong>. It measures the net outward flux of a field per unit volume from a specific point. </p>
         
         <ul>
-            <li>If $\nabla \cdot A > 0$, the point is a <strong>Source</strong> (flux is expanding outward).</li>
-            <li>If $\nabla \cdot A < 0$, the point is a <strong>Sink</strong> (flux is compressing inward).</li>
-            <li>If $\nabla \cdot A = 0$, the field is <strong>Solenoidal</strong> (incompressible, no sources or sinks, like a magnetic field!).</li>
+            <li>If $\nabla \cdot \mathbf{A} > 0$, the point is a <strong>Source</strong> (flux is expanding outward).</li>
+            <li>If $\nabla \cdot \mathbf{A} < 0$, the point is a <strong>Sink</strong> (flux is compressing inward).</li>
+            <li>If $\nabla \cdot \mathbf{A} = 0$, the field is <strong>Solenoidal</strong> (incompressible, no sources or sinks, like a magnetic field!).</li>
         </ul>
         <p><strong>Formulas:</strong></p>
         <ul>
-            <li><strong>Cartesian:</strong> <span class="math-block">&nabla; &middot; A = &part;A<sub>x</sub>/&part;x + &part;A<sub>y</sub>/&part;y + &part;A<sub>z</sub>/&part;z</span></li>
-            <li><strong>Cylindrical:</strong> <span class="math-block">&nabla; &middot; A = (1/&rho;) &part;(&rho;A<sub>&rho;</sub>)/&part;&rho; + (1/&rho;) &part;A<sub>&phi;</sub>/&part;&phi; + &part;A<sub>z</sub>/&part;z</span></li>
-            <li><strong>Spherical:</strong> <span class="math-block">&nabla; &middot; A = (1/r<sup>2</sup>) &part;(r<sup>2</sup>A<sub>r</sub>)/&part;r + (1/(r sin&theta;)) &part;(A<sub>&theta;</sub> sin&theta;)/&part;&theta; + (1/(r sin&theta;)) &part;A<sub>&phi;</sub>/&part;&phi;</span></li>
+            <li><strong>Cartesian:</strong> 
+                <div class="math-block">
+                $$\nabla \cdot \mathbf{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}$$
+                </div>
+            </li>
+            <li><strong>Cylindrical:</strong> 
+                <div class="math-block">
+                $$\nabla \cdot \mathbf{A} = \frac{1}{\rho} \frac{\partial}{\partial \rho}(\rho A_\rho) + \frac{1}{\rho} \frac{\partial A_\phi}{\partial \phi} + \frac{\partial A_z}{\partial z}$$
+                </div>
+            </li>
+            <li><strong>Spherical:</strong> 
+                <div class="math-block">
+                $$\nabla \cdot \mathbf{A} = \frac{1}{r^2} \frac{\partial}{\partial r}(r^2 A_r) + \frac{1}{r\sin\theta} \frac{\partial}{\partial \theta}(A_\theta \sin\theta) + \frac{1}{r\sin\theta} \frac{\partial A_\phi}{\partial \phi}$$
+                </div>
+            </li>
         </ul>
 
-        <div class="concept-title">4. The Curl (&nabla; &times; A)</div>
+        <div class="concept-title">4. The Curl ($\nabla \times \mathbf{A}$)</div>
         <p>Curl operates on a <strong>vector field</strong> to produce another <strong>vector</strong>. It represents the macroscopic circulation, vorticity, or "swirl" of a field around a point. </p>
         
         <ul>
-            <li>If $\nabla \times A = 0$, the field does not swirl. It is called <strong>Irrotational</strong> or Conservative (like a static electric field!).</li>
+            <li>If $\nabla \times \mathbf{A} = 0$, the field does not swirl. It is called <strong>Irrotational</strong> or Conservative (like a static electric field!).</li>
         </ul>
         <p><em>In Cartesian, you use a standard 3x3 determinant matrix. For Cylindrical and Spherical, beware of the scale factors!</em></p>
         <ul>
@@ -152,23 +175,35 @@
         <div class="trap-box">
             <strong>&#9888; O'YEMI'S NULL IDENTITIES (TIME SAVERS!):</strong><br>
             These rules are absolute mathematical laws. If you spot them in an exam, you can write the answer as ZERO immediately without doing any calculus:<br><br>
-            1. <strong>The curl of a gradient is ALWAYS zero:</strong> <span class="math">&nabla; &times; (&nabla;V) = 0</span>. (Meaning: A field derived from a scalar potential can never swirl).<br>
-            2. <strong>The divergence of a curl is ALWAYS zero:</strong> <span class="math">&nabla; &middot; (&nabla; &times; A) = 0</span>. (Meaning: A swirling field never has outward expanding sources/sinks).
+            1. <strong>The curl of a gradient is ALWAYS zero:</strong> <br>
+            <div class="math-block">
+            $$\nabla \times (\nabla V) = \mathbf{0}$$
+            </div>
+            (Meaning: A field derived from a scalar potential can never swirl).<br><br>
+            2. <strong>The divergence of a curl is ALWAYS zero:</strong> <br>
+            <div class="math-block">
+            $$\nabla \cdot (\nabla \times \mathbf{A}) = 0$$
+            </div>
+            (Meaning: A swirling field never has outward expanding sources/sinks).
         </div>
 
-        <div class="concept-title">5. The Laplacian (&nabla;&sup2;V)</div>
-        <p>The Laplacian is simply the divergence of a gradient ($\nabla \cdot \nabla V$). It operates on a scalar to produce a scalar. It represents the second spatial derivative of a field. If $\nabla^2V = 0$, the field satisfies <strong>Laplace's Equation</strong>.</p>
+        <div class="concept-title">5. The Laplacian ($\nabla^2 V$)</div>
+        <p>The Laplacian is simply the divergence of a gradient ($\nabla \cdot \nabla V$). It operates on a scalar to produce a scalar. It represents the second spatial derivative of a field. If $\nabla^2 V = 0$, the field satisfies <strong>Laplace's Equation</strong>.</p>
 
         <div class="concept-title">6. The Two Great Integration Theorems</div>
         <p>These theorems are heavily tested in theory questions. They act as mathematical "bridges" to make complex integrals easier to solve.</p>
         <ul>
             <li><strong>Gauss's Divergence Theorem:</strong> Acts as a bridge between a surface and a volume.<br>
                 <em>"The total outward flux of a vector field through a closed surface equals the volume integral of its divergence."</em><br>
-                <span class="math-block">&oint;<sub>S</sub> A &middot; dS = &int;<sub>v</sub> (&nabla; &middot; A) dv</span>
+                <div class="math-block">
+                $$\oint_S \mathbf{A} \cdot d\mathbf{S} = \int_v (\nabla \cdot \mathbf{A}) dv$$
+                </div>
             </li>
             <li><strong>Stokes' Theorem:</strong> Acts as a bridge between a line and a surface.<br>
                 <em>"The circulation of a vector field around a closed path equals the surface integral of its curl over the bounded area."</em><br>
-                <span class="math-block">&oint;<sub>L</sub> A &middot; dl = &int;<sub>S</sub> (&nabla; &times; A) &middot; dS</span>
+                <div class="math-block">
+                $$\oint_L \mathbf{A} \cdot d\mathbf{l} = \int_S (\nabla \times \mathbf{A}) \cdot d\mathbf{S}$$
+                </div>
             </li>
         </ul>
     </div>
